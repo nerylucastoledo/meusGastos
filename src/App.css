@@ -25,7 +25,7 @@
 input, label {
   display: block;
 }
-
+  
 label {
   margin-bottom: 5px;
 }
@@ -39,4 +39,9 @@ input {
   background-color: rgb(250, 249, 249);
   transition: 0.2s;
   margin-bottom: 20px;
+}
+
+.send-password {
+  color: green;
+  text-align: center;
 }

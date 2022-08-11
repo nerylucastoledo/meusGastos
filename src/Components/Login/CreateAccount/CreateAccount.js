@@ -7,7 +7,7 @@ import styles from './CreateAccount.module.css'
 import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
 import { onValue, ref } from "firebase/database"
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../../../firebase/firebaseConfig';
 
 function CreateAccount() {
@@ -100,6 +100,14 @@ function CreateAccount() {
 
         {loading ? <Button disabled>Cadastrando...</Button> : <Button>Cadastrar</Button> }
       </form>
+
+      <div className={styles.haveAccount}>
+        <p>Já tem uma conta?</p>
+
+        <Link to={'/login'}>
+          <Button>Faça o login</Button>
+        </Link>
+      </div>
     </div>
   )
 }
