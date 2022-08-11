@@ -1,0 +1,18 @@
+.button {
+    background-color: #d2691e;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 1rem;
+    display: block;
+    cursor: pointer;
+    margin: 20px auto;
+    width: 200px;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
