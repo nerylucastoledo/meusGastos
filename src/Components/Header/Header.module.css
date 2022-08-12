@@ -21,7 +21,7 @@
     border: 1px solid transparent;
     transition: .1s;
     cursor: pointer;
-    color: #d2691e;
+    color: #097a7e;
 }
 
 .mobileButton::after {
@@ -41,8 +41,8 @@
     outline: none;
     background-color: #fff;
     box-shadow: 0 0 0 3px #eee;
-    border-color: #d2691e;
-    color: #d2691e;
+    border-color: #097a7e;
+    color: #097a7e;
 }
 
 .mobileButtonActive:after {
@@ -74,7 +74,7 @@
 }
 
 .navMobile a,
-.navMobile button {
+.navMobile p {
     display: flex;
     border-bottom: 1px solid #eee;
     padding: 12px 0;
@@ -82,6 +82,6 @@
 }
 
 .navMobile a:hover {
-    color: #d2691e;
+    color: #097a7e;
     transition: .2s;
 }

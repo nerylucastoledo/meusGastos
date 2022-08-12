@@ -1,15 +1,25 @@
+import { getAuth } from 'firebase/auth'
 import React from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import styles from './Header.module.css'
 
 function Header() {
     const [mobileMenu, setMobileMenu] = React.useState(false)
     const pathname = useLocation()
+    const navigate = useNavigate()
+    const auth = getAuth()
+    const logged = localStorage.getItem('login') || null
 
     React.useEffect(() => {
       setMobileMenu(false)
     }, [pathname])
+
+    function signOut() {
+      localStorage.clear()
+      auth.signOut(auth)
+      .then(() => navigate('/login'))
+    }
 
     return (
       <header className={`${styles.header} container`}>
@@ -27,6 +37,7 @@ function Header() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="new-expense">Inserir Gasto</NavLink>
           <NavLink to="/novo-cartao">Cadastrar Cartão</NavLink>
+          {logged && <p onClick={signOut}>Sair</p>}
         </nav>
       </header>
     )

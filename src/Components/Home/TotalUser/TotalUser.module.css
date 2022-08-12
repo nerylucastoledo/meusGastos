@@ -1,0 +1,11 @@
+.totalUser {
+    text-align: center;
+    font-size: 20px;
+    color: #097a7e;
+}
+
+.totalUser {
+    padding: 10px;
+    border-top: 3px solid #097a7e;
+    border-bottom: 3px solid #097a7e;
+}

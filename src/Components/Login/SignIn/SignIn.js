@@ -14,12 +14,13 @@ function SignIn() {
   const auth = getAuth()
   const navigate = useNavigate()
 
-  function login(event) {
+  async function login(event) {
     event.preventDefault()
     setLoading(true)
 
-    signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      console.log(userCredential)
       localStorage.setItem('displayName', userCredential.user.displayName)
       localStorage.setItem('login', true)
       navigate('/')

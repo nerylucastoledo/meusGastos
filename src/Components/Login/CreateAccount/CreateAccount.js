@@ -32,7 +32,7 @@ function CreateAccount() {
     if (verifyPasswords() && !userExists) {
       createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        updateProfile(auth.currentUser, {formatUser})
+        updateProfile(auth.currentUser, { displayName: formatUser })
         .then(() => {
           localStorage.setItem('displayName', formatUser)
           localStorage.setItem('login', true)
