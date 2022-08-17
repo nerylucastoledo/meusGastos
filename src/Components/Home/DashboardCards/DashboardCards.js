@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './DashboardCards.module.css'
 
 function DashboardCards({ data, card }) {
     const [valueInvoice, setValueInvoice] = React.useState()
+    const navigate = useNavigate()
 
     React.useEffect(() => {
         setValueInvoice(0)
@@ -16,10 +18,14 @@ function DashboardCards({ data, card }) {
         })
     }, [data])
 
+    function acessInvoice() {
+        navigate(`/invoice/${card}`)
+    }
+
     return (
-        <div className={styles.cardBox} style={{ backgroundColor: data['cor']}}>
+        <div onClick={acessInvoice} className={styles.cardBox} style={{ backgroundColor: data['cor']}}>
             <h1>{card}</h1>
-            <p>R$ {valueInvoice}</p>
+            <p>R$ {Number(valueInvoice).toFixed(2)}</p>
         </div>
     )
 }

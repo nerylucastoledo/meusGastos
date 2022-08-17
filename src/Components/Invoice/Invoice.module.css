@@ -1,0 +1,13 @@
+.invoice {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-gap: 20px;
+}
+
+.boxCard {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+}

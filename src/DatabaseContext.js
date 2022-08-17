@@ -55,6 +55,7 @@ export function DatabaseStorage( {children }) {
     return (
         <DatabaseContext.Provider value={{ 
                 data, 
+                date,
                 cards,
                 categorys,
                 peoples,
