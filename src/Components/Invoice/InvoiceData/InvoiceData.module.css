@@ -25,6 +25,10 @@
     right: 10px;
 }
 
+.edit {
+    cursor: pointer;
+}
+
 .remove {
     color: #fff;
     background-color: red;

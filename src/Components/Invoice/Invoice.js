@@ -7,6 +7,7 @@ import InvoicePeople from './InvoicePeople/InvoicePeople';
 
 import styles from './Invoice.module.css'
 import InvoiceData from './InvoiceData/InvoiceData';
+import ModalEdit from './ModalEdit/ModalEdit';
 
 function Invoice() {
   const { card } = useParams()
@@ -14,6 +15,10 @@ function Invoice() {
   const [peoples, setPeoples] = React.useState([])
   const [listData, setListaData] = React.useState([])
   const [nameFilter, setNameFilter] = React.useState()
+  const [openModal, setOpenModal] = React.useState(false)
+  const [itemModal, setItemModal] = React.useState(false)
+  const [categoryModal, setCategoryModal] = React.useState(false)
+  const [valueModal, setValueModal] = React.useState(false)
   const displayName = localStorage.getItem('displayName')
 
   React.useEffect(() => {
@@ -30,7 +35,7 @@ function Invoice() {
       })
     })
     setPeoples(peopleAux)
-  }, [date, card, displayName])
+  }, [date, card, displayName, itemModal, categoryModal, valueModal, nameFilter, peoples])
 
   return (
     <div className='container'>
@@ -38,14 +43,37 @@ function Invoice() {
         <h1>{card}</h1>
       </div>
 
-      <div className={styles.invoice}>
+      <div className={`${styles.invoice} ${openModal && styles.active}`}>
+        {openModal && 
+          <div className={styles.modal}>
+            <ModalEdit 
+              item={itemModal}
+              category={categoryModal}
+              value={valueModal}
+              setOpenModal={setOpenModal}
+              nameFilter={nameFilter}
+            />
+          </div>
+        }
         <div>
           {peoples.map(people => (
-            <InvoicePeople key={people} people={people} setNameFilter={setNameFilter} color={listData['cor']}/>  
+            <InvoicePeople 
+              key={people} 
+              people={people} 
+              setNameFilter={setNameFilter} 
+              color={listData['cor']}
+            />  
           ))}
         </div>
         <div>
-          <InvoiceData data={listData} nameFilter={nameFilter}/>
+          <InvoiceData 
+            data={listData} 
+            nameFilter={nameFilter}
+            setOpenModal={setOpenModal}
+            setItemModal={setItemModal}
+            setCategoryModal={setCategoryModal}
+            setValueModal={setValueModal}
+          />
         </div>
       </div>
     </div>
