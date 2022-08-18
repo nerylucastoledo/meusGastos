@@ -1,0 +1,17 @@
+.newCard {
+    margin-top: 40px;
+}
+
+.colorCard input {
+    max-width: 80%;
+    display: inline-block;
+}
+
+.boxColor {
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    margin-left: 20px;
+    display: inline-block;
+    position: absolute;
+}

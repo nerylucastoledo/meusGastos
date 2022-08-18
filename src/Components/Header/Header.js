@@ -36,7 +36,7 @@ function Header() {
         <nav className={`${styles.navMobile} ${mobileMenu && styles.navMobileActive}`}>
           <NavLink to="/">Home</NavLink>
           <NavLink to="new-expense">Inserir Gasto</NavLink>
-          <NavLink to="/novo-cartao">Cadastrar Cartão</NavLink>
+          <NavLink to="new-card">Cadastrar Cartão</NavLink>
           {logged && <p onClick={signOut}>Sair</p>}
         </nav>
       </header>
