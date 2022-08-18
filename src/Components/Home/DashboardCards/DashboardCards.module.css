@@ -4,6 +4,7 @@
     border-radius: 10px;
     padding: 12px 0;
     color: #fff;
+    cursor: pointer;
 }
 
 .cardBox h1 {

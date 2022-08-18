@@ -29,7 +29,6 @@ function Dashboard() {
   const date = new Date()
   const { setDate, data, cards } = React.useContext(DatabaseContext)
   const [dateFilter, setDateFilter] = React.useState(months[date.getMonth()] + date.getFullYear())
-  console.log(data)
   React.useEffect(() => {
     setDate(dateFilter)
   }, [dateFilter, setDate])

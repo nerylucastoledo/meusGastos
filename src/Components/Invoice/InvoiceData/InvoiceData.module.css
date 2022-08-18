@@ -6,14 +6,16 @@
 }
 
 .dataInvoice {
-    padding: 30px 10px 20px;
+    padding: 30px 10px 15px;
     margin: 10px 0;
     display: flex;
     position: relative;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    background-color: rgb(223, 213, 213);
+    background-color: #aca0ac;
+    color: #fff;
+    font-size: 18px;
 }
 
 .actions {
@@ -21,19 +23,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 5px;
-    top: 2px;
+    top: 1px;
     right: 10px;
-}
-
-.edit {
     cursor: pointer;
 }
 
-.remove {
-    color: #fff;
-    background-color: red;
-    border-radius: 50%;
-    padding: 1px 4px;
-    font-size: 14px;
-    cursor: pointer;
+.totalInvoiceUser {
+    text-align: right;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
 }

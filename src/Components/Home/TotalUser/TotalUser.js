@@ -1,4 +1,5 @@
 import React from 'react'
+import { convert } from '../../Helpers'
 import styles from './TotalUser.module.css'
 
 function TotalUser({ data }) {
@@ -9,27 +10,22 @@ function TotalUser({ data }) {
         filterCards()
 
         function filterCards() {
-            Object.keys(data).forEach(card => filterPeople(card))
+            Object.keys(data).forEach(card => getValueTotal(card))
         }
     
-        function filterPeople(card) {
-            Object.keys(data[card]).forEach(people => {
-                if (people !== 'cor' && people === 'Eu') getValueTotal(card, people)
-            })
-        }
-    
-        function getValueTotal(card, people) {
-            Object.keys(data[card][people]).forEach(item => {
-                const valor = data[card][people][item]['valor']
-                console.log(valor)
-                setValueTotal((last) => last + valor)
-            })
+        function getValueTotal(card) {
+            if (data[card]['Eu']) {
+                Object.keys(data[card]['Eu']).forEach(item => {
+                    const valor = data[card]['Eu'][item]['valor']
+                    setValueTotal((last) => last + valor)
+                })
+            }
         }
     }, [data])
 
   return (
     <div className={styles.totalUser}>
-        <p>Sua parte: <strong>R$ {valueTotal}</strong></p>
+        <p>Sua parte: <strong>{convert(valueTotal)}</strong></p>
     </div>
   )
 }

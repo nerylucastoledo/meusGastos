@@ -30,11 +30,11 @@ function Invoice() {
         setListaData(snapshot.val())
         if (people !== 'cor' && !peopleAux.includes(people)) {
           peopleAux.push(people)
-          if (!nameFilter) setNameFilter(people)
         }
       })
     })
     setPeoples(peopleAux)
+    if (!nameFilter) setNameFilter(peopleAux[0])
   }, [date, card, displayName, itemModal, categoryModal, valueModal, nameFilter, peoples])
 
   return (
