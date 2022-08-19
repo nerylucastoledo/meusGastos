@@ -20,6 +20,7 @@
   margin-bottom: 40px;
   margin-top: 40px;
   text-align: center;
+  color: #097a7e;
 }
 
 input, label {
@@ -28,10 +29,13 @@ input, label {
   
 label {
   margin-bottom: 5px;
+  color: #097a7e;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-input {
-  border: 1px solid #d2691e;
+input, select {
+  border: 1px solid #097a7e;
   width: 100%;
   font-size: 1rem;
   padding: 12px;
@@ -39,6 +43,11 @@ input {
   background-color: rgb(250, 249, 249);
   transition: 0.2s;
   margin-bottom: 20px;
+}
+
+select {
+  background-color: #097a7e;
+  color: #fff;
 }
 
 .send-password {

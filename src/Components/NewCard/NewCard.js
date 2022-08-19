@@ -63,6 +63,7 @@ function NewCard() {
                 label="Nome do cartão"
                 id="nameCard"
                 required
+                placeholder="Qual o nome?"
                 onChange={({ target }) => setNameCard(target.value)}
             />    
             <Button>Cadastrar</Button>

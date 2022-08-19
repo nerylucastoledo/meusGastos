@@ -8,6 +8,7 @@ import Invoice from './Components/Invoice/Invoice';
 
 import './App.css';
 import NewCard from './Components/NewCard/NewCard';
+import NewExpense from './Components/NewExpense/NewExpense';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Routes>
             <Route path='/' element={<Dashboard />}/>
             <Route path='/invoice/:card' element={<Invoice />}/>
-            <Route path='/new-card' element={<NewCard />}/>
+            <Route path='new-card' element={<NewCard />}/>
+            <Route path='new-expense' element={<NewExpense />}/>
             <Route path='login/*' element={<LoginRoutes />}></Route>
           </Routes>
         </main>
