@@ -1,6 +1,6 @@
 .invoice {
     display: grid;
-    grid-template-columns: 1fr 7fr;
+    grid-template-columns: 2fr 7fr;
     grid-gap: 20px;
     position: relative;
 }

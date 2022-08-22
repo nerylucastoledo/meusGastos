@@ -11,8 +11,10 @@ export function DatabaseStorage( {children }) {
     const [categorys, setCategorys]= React.useState([])
     const [peoples, setPeoples]= React.useState([])
     const [date, setDate]= React.useState()
+    const [loading, setLoading]= React.useState(false)
 
     React.useEffect(() => {
+        setLoading(true)
         let peoplesAux = []
         let cateroysAux = []
         const displayName = localStorage.getItem('displayName')
@@ -28,15 +30,16 @@ export function DatabaseStorage( {children }) {
                 } else {
                     setData({})
                 }
+                setLoading(false)
             })
         }
 
         function getPeoples(values) {
             Object.keys(values).forEach(card => {
                 Object.keys(values[card]).forEach(people => {
-                    if (!peoplesAux.includes(people) && people !== 'cor') {
+                    if (people !== 'cor') {
                         getCategorys(values, card, people)
-                        peoplesAux.push(people)
+                        if (!peoplesAux.includes(people)) peoplesAux.push(people)
                     }
                 })
             })
@@ -46,7 +49,6 @@ export function DatabaseStorage( {children }) {
         function getCategorys(values, card, people) {
             Object.keys(values[card][people]).forEach(item => {
                 const category = values[card][people][item]['categoria']
-
                 if (!cateroysAux.includes(category)) cateroysAux.push(category)
             })
             setCategorys(cateroysAux)
@@ -61,7 +63,8 @@ export function DatabaseStorage( {children }) {
                 cards,
                 categorys,
                 peoples,
-                setDate
+                setDate,
+                loading
             }}
             >
             {children}

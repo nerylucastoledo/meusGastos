@@ -1,8 +1,8 @@
 .eachInvoice {
-    background-color: #eee;
+    background-color: rgb(247, 244, 244);
     margin-top: 20px;
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 10px;
 }
 
 .dataInvoice {
@@ -13,9 +13,14 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    background-color: #aca0ac;
-    color: #fff;
-    font-size: 18px;
+    background-color: #dbd3db;
+    color: rgb(66, 63, 63);
+    font-weight: 500;
+    border: 1px solid rgb(197, 196, 196);
+}
+
+.item {
+    margin-right: 10px;
 }
 
 .actions {
@@ -33,4 +38,34 @@
     margin: 20px 0;
     font-size: 20px;
     font-weight: bold;
+    color: rgb(66, 63, 63);
+}
+
+@media (max-width: 420px) {
+    .dataInvoice {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0px;
+    }
+
+    .item {
+        display: block;
+        text-align: center;
+        order: 2;
+        margin-right: 0px;
+    }
+
+    .value {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        order: 3;
+    }
+
+    .actions {
+        position: relative;
+        margin-bottom: 10px;
+        right: 0px;
+        order: 1;
+    }
 }

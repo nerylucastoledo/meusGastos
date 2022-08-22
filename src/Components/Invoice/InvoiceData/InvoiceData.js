@@ -46,8 +46,8 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
       {nameFilter && data[nameFilter] && total ? 
         Object.keys(data[nameFilter]).map(item => 
           <div key={item} className={styles.dataInvoice}>
-            <span>{item}</span>
-            <span>{convert(data[nameFilter][item]['valor'])}</span>
+            <span className={styles.item}>{item}</span>
+            <span className={styles.value}>{convert(data[nameFilter][item]['valor'])}</span>
 
             <div className={styles.actions}>
               <p 
@@ -58,10 +58,10 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
                   data[nameFilter][item]['valor']
                 )}
                 >
-                <FaEdit color='#222' size='16px'/>
+                <FaEdit color='#0095D9' size='16px'/>
               </p>
               <p onClick={() => handleClickRemove(item)}>
-                <FaTrashAlt color='#222' size='16px'/>
+                <FaTrashAlt color='#E53935' size='16px'/>
               </p>
             </div>
           </div>

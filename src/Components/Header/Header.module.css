@@ -64,6 +64,10 @@
     pointer-events: none;
 }
 
+.navMobile > a, .navMobile > p {
+    color: #097a7e;
+}
+
 .navMobileActive {
     transition: .3s;
     transform: initial;

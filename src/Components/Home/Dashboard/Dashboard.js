@@ -9,6 +9,7 @@ import DashboardCards from '../DashboardCards/DashboardCards'
 import TotalUser from '../TotalUser/TotalUser'
 
 import styles from './Dashboard.module.css'
+import Loading from '../../Loading/Loading'
 
 const months = [
   'janeiro', 
@@ -28,10 +29,11 @@ const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '
 
 function Dashboard() {
   const date = new Date()
-  const { setDate, data, cards } = React.useContext(DatabaseContext)
+  const { setDate, data, cards, loading } = React.useContext(DatabaseContext)
   const [dateFilter, setDateFilter] = React.useState(months[date.getMonth()] + date.getFullYear())
-  
+
   React.useEffect(() => {
+    console.log(dateFilter)
     setDate(dateFilter)
   }, [dateFilter, setDate])
 
@@ -45,25 +47,31 @@ function Dashboard() {
         years={years}
       />
 
-      {Object.keys(data).length ?
-        <>
-          {cards.map((card) => (
-            <DashboardCards 
-              key={card} 
-              data={data[card]} 
-              card={card}k
-            />
-          ))}
-
-          <TotalUser data={data}/>
-        </>
+      {loading ? 
+        <Loading /> 
         :
-        <div className={`container ${styles.notFound}`}>
-          <p>Nenhum dado encontrado :(</p>
-          <Link to={'/new-card'}>
-            <Button>Cadastrar cartão</Button>
-          </Link>
-        </div>
+        <>
+          {Object.keys(data).length ?
+            <div>
+              {cards.map((card) => (
+                <DashboardCards 
+                  key={card} 
+                  data={data[card]} 
+                  card={card}k
+                />
+              ))}
+
+              <TotalUser data={data}/>
+            </div>
+            :
+            <div className={`container ${styles.notFound}`}>
+              <p>Nenhum dado encontrado :(</p>
+              <Link to={'/new-card'}>
+                <Button>Cadastrar cartão</Button>
+              </Link>
+            </div>
+          }
+        </>
       }
     </section>
   )
