@@ -12,17 +12,19 @@ function DashboardFilter( { setDateFilter, monthToday, yearToday, months, years 
     return (
         <section>
             <form className={styles.filterSelect}>
-                <select defaultValue={monthToday} onChange={({target}) => setMonthFilter(target.value)}>
+                <select 
+                    defaultValue={monthToday} 
+                    onChange={({target}) => setMonthFilter(target.value)}
+                    >
                     <option value="" disabled>Selecione o Mês</option>
-                    {months.map(month => (
-                        <option key={month} value={month}>{month}</option>
-                    ))}
+                    {months.map(month => <option key={month} value={month}>{month}</option>)}
                 </select>
-                <select defaultValue={yearToday} onChange={({target}) => setYearFilter(target.value)}>
+                <select 
+                    defaultValue={yearToday} 
+                    onChange={({target}) => setYearFilter(target.value)}
+                    >
                     <option value="" disabled>Selecione o Ano</option>
-                    {years.map(year => (
-                        <option key={year} value={year}>{year}</option>
-                    ))}
+                    {years.map(year => <option key={year} value={year}>{year}</option>)}
                 </select>
             </form>
         </section>

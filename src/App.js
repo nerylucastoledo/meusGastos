@@ -1,14 +1,16 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { DatabaseStorage } from './DatabaseContext';
-import Header from './Components/Header/Header';
-import LoginRoutes from './Components/Login/LoginRoutes';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import Dashboard from './Components/Home/Dashboard/Dashboard';
-import Invoice from './Components/Invoice/Invoice';
+import { DatabaseStorage } from './DatabaseContext'
+import ProtectedRoute from './ProtectedRoute'
 
-import './App.css';
-import NewCard from './Components/NewCard/NewCard';
-import NewExpense from './Components/NewExpense/NewExpense';
+import Header from './Components/Header/Header'
+import Dashboard from './Components/Home/Dashboard/Dashboard'
+import Invoice from './Components/Invoice/Invoice'
+import NewCard from './Components/NewCard/NewCard'
+import NewExpense from './Components/NewExpense/NewExpense'
+import LoginRoutes from './Components/Login/LoginRoutes'
+
+import './App.css'
 
 function App() {
   return (
@@ -17,16 +19,40 @@ function App() {
         <Header />
         <main className="App">
           <Routes>
-            <Route path='/' element={<Dashboard />}/>
-            <Route path='/invoice/:card' element={<Invoice />}/>
-            <Route path='new-card' element={<NewCard />}/>
-            <Route path='new-expense' element={<NewExpense />}/>
+            <Route path='/' 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/invoice/:card'
+              element={
+                <ProtectedRoute>
+                  <Invoice />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='new-card' 
+              element={
+                <ProtectedRoute>
+                  <NewCard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='new-expense'
+              element={
+                <ProtectedRoute>
+                  <NewExpense />
+                </ProtectedRoute>
+              }
+            />
             <Route path='login/*' element={<LoginRoutes />}></Route>
           </Routes>
         </main>
       </BrowserRouter>
     </DatabaseStorage>
-  );
+  )
 }
 
-export default App;
+export default App

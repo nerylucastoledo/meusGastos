@@ -1,6 +1,7 @@
 import React from "react"
-import { db } from "./firebase/firebaseConfig"
+
 import { onValue, ref } from "firebase/database"
+import { db } from "./firebase/firebaseConfig"
 
 export const DatabaseContext = React.createContext()
 
@@ -45,6 +46,7 @@ export function DatabaseStorage( {children }) {
         function getCategorys(values, card, people) {
             Object.keys(values[card][people]).forEach(item => {
                 const category = values[card][people][item]['categoria']
+
                 if (!cateroysAux.includes(category)) cateroysAux.push(category)
             })
             setCategorys(cateroysAux)
@@ -60,7 +62,8 @@ export function DatabaseStorage( {children }) {
                 categorys,
                 peoples,
                 setDate
-            }}>
+            }}
+            >
             {children}
         </DatabaseContext.Provider>
     )

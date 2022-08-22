@@ -24,7 +24,11 @@ function DashboardCards({ data, card }) {
     }
 
     return (
-        <div onClick={acessInvoice} className={styles.cardBox} style={{ backgroundColor: data['cor']}}>
+        <div 
+            className={styles.cardBox} 
+            style={{ backgroundColor: data['cor'] }}
+            onClick={acessInvoice} 
+            >
             <h1>{card}</h1>
             <p>{convert(valueInvoice)}</p>
         </div>

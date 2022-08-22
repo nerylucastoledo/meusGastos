@@ -1,13 +1,14 @@
 import React from 'react'
+
 import { Link } from 'react-router-dom'
 import { DatabaseContext } from '../../../DatabaseContext'
 
 import DashboardFilter from '../DashboardFilter/DashboardFilter'
 import Button from '../../Forms/Button'
-
-import styles from './Dashboard.module.css'
 import DashboardCards from '../DashboardCards/DashboardCards'
 import TotalUser from '../TotalUser/TotalUser'
+
+import styles from './Dashboard.module.css'
 
 const months = [
   'janeiro', 
@@ -43,6 +44,7 @@ function Dashboard() {
         months={months}
         years={years}
       />
+
       {Object.keys(data).length ?
         <>
           {cards.map((card) => (
@@ -58,7 +60,9 @@ function Dashboard() {
         :
         <div className={`container ${styles.notFound}`}>
           <p>Nenhum dado encontrado :(</p>
-          <Link to={'/new-card'}><Button>Cadastrar cartão</Button></Link>
+          <Link to={'/new-card'}>
+            <Button>Cadastrar cartão</Button>
+          </Link>
         </div>
       }
     </section>
