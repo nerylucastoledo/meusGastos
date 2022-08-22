@@ -1,24 +1,25 @@
 import React from 'react'
+
+import { Link, useNavigate } from 'react-router-dom';
+import { db } from '../../../firebase/firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
+import { onValue, ref } from "firebase/database"
+
 import Input from '../../Forms/Input'
 import Button from '../../Forms/Button'
 
 import styles from './CreateAccount.module.css'
 
-import { createUserWithEmailAndPassword, updateProfile, getAuth } from "firebase/auth";
-import { onValue, ref } from "firebase/database"
-
-import { Link, useNavigate } from 'react-router-dom';
-import { db } from '../../../firebase/firebaseConfig';
-
 function CreateAccount() {
+  const auth = getAuth()
+  const navigate = useNavigate()
+
   const [email, setEmail] = React.useState()
   const [password, setPassword] = React.useState()
   const [repeatPassword, setRepeatPassword] = React.useState()
   const [usuario, setUsuario] = React.useState()
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
-  const auth = getAuth()
-  const navigate = useNavigate()
 
   function create(event) {
     event.preventDefault()
@@ -36,8 +37,8 @@ function CreateAccount() {
         .then(() => {
           localStorage.setItem('displayName', formatUser)
           localStorage.setItem('login', true)
-          setLoading(false)
           setError(false)
+          setLoading(false)
           navigate('/')
         })
       })
@@ -59,7 +60,7 @@ function CreateAccount() {
   return (
     <div className='container'>
       <h1 className='title'>Crie sua conta</h1>
-      <form className={styles.formLogin} onSubmit={create}>
+      <form className='form-login' onSubmit={create}>
         {error && <p className={styles.error}>{error}</p>}
 
         <Input
@@ -98,7 +99,7 @@ function CreateAccount() {
           onChange={({ target }) => setRepeatPassword(target.value)}
         />
 
-        {loading ? <Button disabled>Cadastrando...</Button> : <Button>Cadastrar</Button> }
+        {loading ? <Button disabled>Cadastrando...</Button> : <Button>Cadastrar</Button>}
       </form>
 
       <div className={styles.haveAccount}>

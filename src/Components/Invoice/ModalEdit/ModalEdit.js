@@ -1,12 +1,14 @@
 import React from 'react'
-import Input from '../../Forms/Input'
-import Button from '../../Forms/Button'
-import styles from '../../Login/CreateAccount/CreateAccount.module.css'
-import style from './ModalEdit.module.css'
-import { ref, update } from 'firebase/database'
+
 import { db } from '../../../firebase/firebaseConfig'
+import { ref, update } from 'firebase/database'
 import { DatabaseContext } from '../../../DatabaseContext'
 import { useParams } from 'react-router-dom'
+
+import Input from '../../Forms/Input'
+import Button from '../../Forms/Button'
+
+import style from './ModalEdit.module.css'
 
 function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
   const params = useParams()
@@ -17,6 +19,7 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
   const [editValue, setEditValue] = React.useState(value)
 
   function submitEdit(event) {
+    // colocar notificacao
     event.preventDefault()
     const url = `${displayName}/${date}/${params.card}/${nameFilter}/${item}`
     const body = {
@@ -30,7 +33,7 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
   }
 
   return (
-    <form className={`${styles.formLogin} ${style.modalEdit}`} onSubmit={submitEdit}>
+    <form className={`form-login ${style.modalEdit}`} onSubmit={submitEdit}>
         <p className={style.remove} onClick={() => setOpenModal(false)}>
           X
         </p>
@@ -39,6 +42,7 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
           label="Item" 
           value={item} 
           disabled
+          style={{ backgroundColor: '#eee'}}
         />
         <Input 
           type="text" 

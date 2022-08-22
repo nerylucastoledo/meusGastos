@@ -1,6 +1,7 @@
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import React from 'react'
+
 import { Link } from 'react-router-dom'
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 
 import Button from '../../Forms/Button'
 import Input from '../../Forms/Input'
@@ -8,11 +9,12 @@ import Input from '../../Forms/Input'
 import styles from '../CreateAccount/CreateAccount.module.css'
 
 function LostPassword() {
+  const auth = getAuth()
+
   const [email, setEmail] = React.useState()
   const [emailSending, setEmailSending] = React.useState()
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
-  const auth = getAuth()
 
   function resetPassword(event) {
     event.preventDefault()
@@ -32,7 +34,7 @@ function LostPassword() {
   return (
     <div className='container'>
       <h1 className='title'>Resetar senha</h1>
-      <form className={styles.formLogin} onSubmit={resetPassword}>
+      <form className='form-login' onSubmit={resetPassword}>
         {error && <p className={styles.error}>{error}</p>}
 
         {emailSending ? 
@@ -52,7 +54,7 @@ function LostPassword() {
               required
               onChange={({ target }) => setEmail(target.value)}
             />
-            {loading ? <Button disabled>Enviando...</Button> : <Button>Enviar</Button> }
+            {loading ? <Button disabled>Enviando...</Button> : <Button>Enviar</Button>}
           </>
           }
       </form>

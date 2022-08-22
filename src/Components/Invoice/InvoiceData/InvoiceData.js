@@ -11,6 +11,7 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
   const params = useParams()
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')
+
   const [total, setTotal] = React.useState(0)
 
   React.useEffect(() => {
@@ -27,6 +28,7 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
     const url = `${displayName}/${date}/${params.card}/${nameFilter}/${item}`
 
     if (window.confirm('Quer realmente deletar?')) {
+      // colocar notificacao
       remove(ref(db, url))
       .then(() =>  console.log('deu certo'))
     }

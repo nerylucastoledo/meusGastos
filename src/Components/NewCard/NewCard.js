@@ -2,13 +2,12 @@ import React from 'react'
 import Input from '../Forms/Input'
 import Button from '../Forms/Button'
 
-import { onValue, ref, update } from 'firebase/database'
+import { useNavigate } from 'react-router-dom'
 import { db } from '../../firebase/firebaseConfig'
+import { onValue, ref, update } from 'firebase/database'
 import {DatabaseContext} from '../../DatabaseContext' 
 
-import styles from '../Login/CreateAccount/CreateAccount.module.css'
 import style from './NewCard.module.css'
-import { useNavigate } from 'react-router-dom'
 
 function NewCard() {
     const navigate = useNavigate()
@@ -39,7 +38,7 @@ function NewCard() {
   return (
     <div className={`container ${style.newCard}`}>
         <h1 className='title'>Novo cartão</h1>
-        <form className={styles.formLogin} onSubmit={newCard}>
+        <form className='form-login' onSubmit={newCard}>
             <div className={style.colorCard}>
                 <Input 
                     type="color"

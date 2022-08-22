@@ -8,7 +8,7 @@ function InvoicePeople({ people, setNameFilter, color }) {
       style={{ backgroundColor: color}}
       onClick={(({target}) => setNameFilter(target.innerText))}
       >
-        <p>{people}</p>
+      <p>{people}</p>
     </div>
   )
 }

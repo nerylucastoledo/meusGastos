@@ -1,28 +1,30 @@
-import { onValue, ref, update } from 'firebase/database'
 import React from 'react'
+
 import { useNavigate } from 'react-router-dom'
-import { DatabaseContext } from '../../DatabaseContext'
 import { db } from '../../firebase/firebaseConfig'
+import { onValue, ref, update } from 'firebase/database'
+import { DatabaseContext } from '../../DatabaseContext'
+
 import Button from '../Forms/Button'
 import Input from '../Forms/Input'
-import styles from '../Login/CreateAccount/CreateAccount.module.css'
+
 import style from './NewExpense.module.css'
 
-const months = [
-    'janeiro', 
-    'fevereiro', 
-    'março', 
-    'abril', 
-    'maio', 
-    'junho', 
-    'julho', 
-    'agosto', 
-    'setembro', 
-    'outubro', 
-    'novembro', 
-    'dezembro'
-  ]
-  const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
+// const months = [
+//     'janeiro', 
+//     'fevereiro', 
+//     'março', 
+//     'abril', 
+//     'maio', 
+//     'junho', 
+//     'julho', 
+//     'agosto', 
+//     'setembro', 
+//     'outubro', 
+//     'novembro', 
+//     'dezembro'
+// ]
+// const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
 
 function NewExpense() {
     const navigate = useNavigate()
@@ -110,7 +112,7 @@ function NewExpense() {
   return (
     <div className='container'>
         <h1 className='title'>Novo gasto</h1>
-        <form className={styles.formLogin} onSubmit={sendExpense}>
+        <form className='form-login' onSubmit={sendExpense}>
 
             <label>Cartão</label>
             <select defaultValue="" required onChange={({ target }) => setCard(target.value)}>

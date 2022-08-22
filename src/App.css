@@ -54,3 +54,11 @@ select {
   color: green;
   text-align: center;
 }
+
+.form-login {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+}

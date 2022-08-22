@@ -1,17 +1,21 @@
-import { onValue, ref } from 'firebase/database';
 import React from 'react'
+
+import { db } from '../../firebase/firebaseConfig';
+import { onValue, ref } from 'firebase/database';
 import { useParams } from 'react-router-dom';
 import { DatabaseContext } from '../../DatabaseContext';
-import { db } from '../../firebase/firebaseConfig';
-import InvoicePeople from './InvoicePeople/InvoicePeople';
 
-import styles from './Invoice.module.css'
+import InvoicePeople from './InvoicePeople/InvoicePeople';
 import InvoiceData from './InvoiceData/InvoiceData';
 import ModalEdit from './ModalEdit/ModalEdit';
+
+import styles from './Invoice.module.css'
 
 function Invoice() {
   const { card } = useParams()
   const { date } = React.useContext(DatabaseContext)
+  const displayName = localStorage.getItem('displayName')
+
   const [peoples, setPeoples] = React.useState([])
   const [listData, setListaData] = React.useState([])
   const [nameFilter, setNameFilter] = React.useState()
@@ -19,12 +23,11 @@ function Invoice() {
   const [itemModal, setItemModal] = React.useState(false)
   const [categoryModal, setCategoryModal] = React.useState(false)
   const [valueModal, setValueModal] = React.useState(false)
-  const displayName = localStorage.getItem('displayName')
 
   React.useEffect(() => {
     let peopleAux = peoples
-
     const database = ref(db, `${displayName}/${date}/${card}`)
+
     onValue(database, (snapshot) => {
       Object.keys(snapshot.val()).forEach(people => {
         setListaData(snapshot.val())
@@ -34,7 +37,10 @@ function Invoice() {
       })
     })
     setPeoples(peopleAux)
-    if (!nameFilter) setNameFilter(peopleAux[0])
+    if (!nameFilter) {
+      setNameFilter(peopleAux[0])
+    }
+
   }, [date, card, displayName, itemModal, categoryModal, valueModal, nameFilter, peoples])
 
   return (

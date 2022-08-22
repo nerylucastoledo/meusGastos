@@ -1,18 +1,21 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import React from 'react'
+
 import { useNavigate, Link } from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
 import Button from '../../Forms/Button'
 import Input from '../../Forms/Input'
 
 import styles from '../CreateAccount/CreateAccount.module.css'
 
 function SignIn() {
+  const auth = getAuth()
+  const navigate = useNavigate()
+
   const [email, setEmail] = React.useState()
   const [password, setPassword] = React.useState()
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
-  const auth = getAuth()
-  const navigate = useNavigate()
 
   async function login(event) {
     event.preventDefault()
@@ -20,7 +23,6 @@ function SignIn() {
 
     await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log(userCredential)
       localStorage.setItem('displayName', userCredential.user.displayName)
       localStorage.setItem('login', true)
       navigate('/')
@@ -36,7 +38,7 @@ function SignIn() {
   return (
     <div className='container'>
       <h1 className='title'>Faça o login</h1>
-      <form className={styles.formLogin} onSubmit={login}>
+      <form className='form-login' onSubmit={login}>
         {error && <p className={styles.error}>{error}</p>}
 
         <Input
