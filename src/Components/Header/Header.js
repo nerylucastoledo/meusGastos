@@ -37,7 +37,7 @@ function Header() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="new-expense">Inserir Gasto</NavLink>
           <NavLink to="new-card">Cadastrar Cartão</NavLink>
-          {logged && <p onClick={signOut}>Sair</p>}
+          {logged ? <p onClick={signOut}>Sair</p> : <NavLink to="login">Login</NavLink>}
         </nav>
       </header>
     )

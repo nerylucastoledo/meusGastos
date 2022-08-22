@@ -6,6 +6,23 @@ import { db } from '../../firebase/firebaseConfig'
 import Button from '../Forms/Button'
 import Input from '../Forms/Input'
 import styles from '../Login/CreateAccount/CreateAccount.module.css'
+import style from './NewExpense.module.css'
+
+const months = [
+    'janeiro', 
+    'fevereiro', 
+    'março', 
+    'abril', 
+    'maio', 
+    'junho', 
+    'julho', 
+    'agosto', 
+    'setembro', 
+    'outubro', 
+    'novembro', 
+    'dezembro'
+  ]
+  const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
 
 function NewExpense() {
     const navigate = useNavigate()
@@ -19,12 +36,15 @@ function NewExpense() {
     const [category, setCategory] = React.useState('')
     const [newCategory, setNewCategory] = React.useState('')
     const [card, setCard] = React.useState('')
+    const [quantity, setQuantity] = React.useState('')
+    const [checked, setChecked] = React.useState(false)
 
     function sendExpense(event) {
         event.preventDefault()
         const nameValidated = people === 'Nova' ? newPeople : people
         const categoryValidated = category === 'Nova' ? newCategory : category
         const urlBase = `${displayName}/${date}/${card}/${nameValidated}`
+        if (quantity) console.log(quantity)
         const result = verifyExistsData(urlBase)
         if (result) {
             const body = {
@@ -146,6 +166,28 @@ function NewExpense() {
                     placeholder="Qual a categoria?"
                     required
                     onChange={({ target }) => setNewCategory(target.value)}
+                />
+            }
+            
+            <div className={style.boxCheckbox}>
+                <label>
+                    <input 
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => setChecked(!checked)}
+                    />
+                    Tem parcelas?
+                </label>
+            </div>
+
+            {checked &&
+                <Input
+                    type="number"
+                    id="quantity"
+                    label="Quantidade"
+                    placeholder="Quantas parcelas?"
+                    required
+                    onChange={({ target }) => setQuantity(target.value)}
                 />
             }
 

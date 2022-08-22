@@ -15,7 +15,7 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
 
   React.useEffect(() => {
     setTotal(0)
-    if (data && nameFilter) {
+    if (data && nameFilter && data[nameFilter]) {
       Object.keys(data[nameFilter]).forEach(item => {
         const valor = data[nameFilter][item]['valor']
         setTotal((last) => last + valor)
@@ -64,7 +64,9 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
             </div>
           </div>
         ) : 
-        <p>Nenhum dado disponível :(</p>
+        <p style={{ textAlign: 'center', marginTop: '10px'}}>
+          Nenhum dado disponível :(
+        </p>
       }
 
       <div className={styles.totalInvoiceUser}>
