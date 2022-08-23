@@ -1,0 +1,72 @@
+import React from 'react'
+import Chart from 'react-apexcharts'
+
+function ChartPie({ data, categorys }) {
+  const [labelCategory, setLabelCategory] = React.useState([])
+  const [seriesCategory, setSeriesCategory] = React.useState([])
+
+  React.useEffect(() => {
+    var objetAux = {}
+    filterCard()
+
+    function filterCard() {
+      Object.keys(data).forEach(card => filterPeople(card))
+    }
+
+    function filterPeople(card) {
+      if (data[card]['Eu']) {
+        Object.keys(data[card]['Eu']).forEach(item => {
+          const nameCategory = data[card]['Eu'][item]['categoria']
+          const valor = data[card]['Eu'][item]['valor']
+
+          if (objetAux[nameCategory]) {
+            objetAux[nameCategory] += valor
+          } else {
+            objetAux[nameCategory] = valor
+          }
+        })
+      }
+    }
+
+    categorys.forEach((item) => {
+      if(objetAux[item] !== undefined) {
+        setLabelCategory((last) => [...last, item])
+        setSeriesCategory((last) => [...last, objetAux[item]])
+      }
+    })
+    
+  }, [data])
+
+  const state = {
+    series: [...seriesCategory],
+    chartOptions: {
+      labels: [...labelCategory],
+      legend: {
+        position: 'bottom'
+      },
+      responsive: [{
+        options: {
+          legend: {
+            position: 'center'
+          }
+        }
+      }]
+    }
+  }
+
+  return (
+    <div className="app">
+      <div className="row">
+        <div className="mixed-chart">
+          <Chart
+            options={state.chartOptions}
+            series={state.series}
+            type="donut"
+          />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ChartPie

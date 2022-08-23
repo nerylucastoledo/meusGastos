@@ -6,6 +6,7 @@ import { DatabaseContext } from '../../../DatabaseContext'
 import DashboardFilter from '../DashboardFilter/DashboardFilter'
 import Button from '../../Forms/Button'
 import DashboardCards from '../DashboardCards/DashboardCards'
+import ChartPie from '../../Charts/ChartPie'
 import TotalUser from '../TotalUser/TotalUser'
 import Loading from '../../Loading/Loading'
 
@@ -29,11 +30,10 @@ const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '
 
 function Dashboard() {
   const date = new Date()
-  const { setDate, data, cards, loading } = React.useContext(DatabaseContext)
+  const { setDate, data, cards, loading, categorys } = React.useContext(DatabaseContext)
   const [dateFilter, setDateFilter] = React.useState(months[date.getMonth()] + date.getFullYear())
 
   React.useEffect(() => {
-    console.log(dateFilter)
     setDate(dateFilter)
   }, [dateFilter, setDate])
 
@@ -60,6 +60,11 @@ function Dashboard() {
                   card={card}k
                 />
               ))}
+
+              <ChartPie 
+                data={data}
+                categorys={categorys}
+              />
 
               <TotalUser data={data}/>
             </div>
