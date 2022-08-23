@@ -10,21 +10,20 @@ import Input from '../Forms/Input'
 
 import style from './NewExpense.module.css'
 
-// const months = [
-//     'janeiro', 
-//     'fevereiro', 
-//     'março', 
-//     'abril', 
-//     'maio', 
-//     'junho', 
-//     'julho', 
-//     'agosto', 
-//     'setembro', 
-//     'outubro', 
-//     'novembro', 
-//     'dezembro'
-// ]
-// const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
+const months = [
+    'janeiro', 
+    'fevereiro', 
+    'março', 
+    'abril', 
+    'maio', 
+    'junho', 
+    'julho', 
+    'agosto', 
+    'setembro', 
+    'outubro', 
+    'novembro', 
+    'dezembro'
+]
 
 function NewExpense() {
     const navigate = useNavigate()
@@ -38,68 +37,77 @@ function NewExpense() {
     const [category, setCategory] = React.useState('')
     const [newCategory, setNewCategory] = React.useState('')
     const [card, setCard] = React.useState('')
-    const [quantity, setQuantity] = React.useState('')
+    const [cardInstallment, setCardInstallment] = React.useState('')
     const [checked, setChecked] = React.useState(false)
 
     function sendExpense(event) {
         event.preventDefault()
+
         const nameValidated = people === 'Nova' ? newPeople : people
         const categoryValidated = category === 'Nova' ? newCategory : category
-        const urlBase = `${displayName}/${date}/${card}/${nameValidated}`
-        if (quantity) console.log(quantity)
-        const result = verifyExistsData(urlBase)
-        if (result) {
-            const body = {
-                [item]: {
+
+        if (checked && cardInstallment > 1) {
+            for (let index = 0; index < cardInstallment; index++) {
+                var numberOfMonths = 11
+                var [currentMonth, currentYear] = date.split(20)
+                var indexOfMonth = months.indexOf(currentMonth) + index
+
+                if (indexOfMonth > numberOfMonths) {
+                    currentYear = parseInt(currentYear) + 1
+                    indexOfMonth = (indexOfMonth - 1) - numberOfMonths
+                }
+
+                var nameItem = `${item} ${index + 1}-${cardInstallment}`
+                var month = `${months[indexOfMonth]}20${currentYear}`
+
+                saveDataWithCardAndPeople(nameItem, nameValidated, categoryValidated, month)
+            }
+        } else {
+            saveDataWithCardAndPeople(item, nameValidated, categoryValidated, date)
+        }
+    }
+
+    function saveDataWithCardAndPeople(nameItem, namePeople, nameCategory, month) {
+        const url = `${displayName}/${month}/${card}/${namePeople}`
+        const body = {
+            [nameItem]: {
+                valor: Number(value),
+                categoria: nameCategory
+            }
+        }
+        const result = verifyExistsData(url)
+        result ? saveDataOnDatabase(url, body) : saveDataWithCard(nameItem, namePeople, nameCategory, month)
+    }
+
+    function saveDataWithCard(nameItem, namePeople, nameCategory, month) {
+        const url = `${displayName}/${month}/${card}`
+        const body = {
+            [namePeople]: {
+                [nameItem]: {
                     valor: Number(value),
-                    categoria: categoryValidated
+                    categoria: nameCategory
                 }
             }
-            update(ref(db, urlBase), body)
-            .then(() => navigate('/'))
-        } else {
-            saveDataToCard(nameValidated, categoryValidated)
         }
-    }
-
-    function saveDataToCard(nameValidated, categoryValidated) {
-        const url = `${displayName}/${date}/${card}`
         const result = verifyExistsData(url)
-        if (result) {
-            const body = {
-                [nameValidated]: {
-                    [item]: {
-                        valor: Number(value),
-                        categoria: categoryValidated
-                    }
-                }
-            }
-            update(ref(db, url), body)
-            .then(() => navigate('/'))
-        } else {
-            saveDataToDate(nameValidated, categoryValidated)
-        }
+        result ? saveDataOnDatabase(url, body) : saveDataToNeWCard(nameItem, namePeople, nameCategory, month)
     }
 
-    function saveDataToDate(nameValidated, categoryValidated) {
+    function saveDataToNeWCard(nameItem, namePeople, nameCategory, month) {
+        const url = `${displayName}/${month}`
         const cor = data[card]['cor']
-        const url = `${displayName}/${date}`
-        const result = verifyExistsData(url)
-        if (result) {
-            const body = {
-                [card]: {
-                    [nameValidated]: {
-                        [item]: {
-                            valor: Number(value),
-                            categoria: categoryValidated
-                        }
-                    },
-                    cor: cor
-                }
+        const body = {
+            [card]: {
+                [namePeople]: {
+                    [nameItem]: {
+                        valor: Number(value),
+                        categoria: nameCategory
+                    }
+                },
+                cor: cor
             }
-            update(ref(db, url), body)
-            .then(() => navigate('/'))
         }
+        saveDataOnDatabase(url, body)
     }
 
     function verifyExistsData(url) {
@@ -107,6 +115,11 @@ function NewExpense() {
         const database = ref(db, url)
         onValue(database, (snapshot => result = snapshot.exists()))
         return result
+    }
+
+    async function saveDataOnDatabase(url, body) {
+        await update(ref(db, url), body)
+        .then(() => navigate('/'))
     }
 
   return (
@@ -185,11 +198,11 @@ function NewExpense() {
             {checked &&
                 <Input
                     type="number"
-                    id="quantity"
+                    id="cardInstallment"
                     label="Quantidade"
                     placeholder="Quantas parcelas?"
                     required
-                    onChange={({ target }) => setQuantity(target.value)}
+                    onChange={({ target }) => setCardInstallment(target.value)}
                 />
             }
 

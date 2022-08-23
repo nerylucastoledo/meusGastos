@@ -7,9 +7,9 @@ import DashboardFilter from '../DashboardFilter/DashboardFilter'
 import Button from '../../Forms/Button'
 import DashboardCards from '../DashboardCards/DashboardCards'
 import TotalUser from '../TotalUser/TotalUser'
+import Loading from '../../Loading/Loading'
 
 import styles from './Dashboard.module.css'
-import Loading from '../../Loading/Loading'
 
 const months = [
   'janeiro', 
