@@ -5,10 +5,11 @@ import { onValue, ref } from "firebase/database"
 import { db } from "../../firebase/firebaseConfig"
 
 import Button from '../Forms/Button'
-
-import styles from './Debts.module.css'
 import ModalEdit from './ModalEdit/ModalEdit'
 import ModalNewValue from './ModaNewValue/ModalNewValue'
+import Loading from '../Loading/Loading'
+
+import styles from './Debts.module.css'
 
 function Debts() {
 
@@ -16,8 +17,10 @@ function Debts() {
   const [openModalNewValue, setOpenModalNewValue] = React.useState(false)
   const [nameEmprestimo, setNameEmprestimo] = React.useState(0)
   const [listEmprestimo, setListEmprestimos] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
   
   React.useEffect(() => {
+    setLoading(true)
     let listAux = []
     let listAuxName = []
     setListEmprestimos([])
@@ -36,7 +39,10 @@ function Debts() {
           }
         })
         setListEmprestimos(listAux)
+      } else {
+        setListEmprestimos([])
       }
+      setLoading(false)
     })
 
   }, [openModal, openModalNewValue])
@@ -60,65 +66,74 @@ function Debts() {
 
   return (
     <>
-      {listEmprestimo ?
-        <div 
-          className={`
-            container 
-            ${styles.boxDebt}} 
-            ${openModal && styles.active}
-            ${openModalNewValue && styles.active}`
-          }
-        >
+      {loading ? 
+        <Loading />
+        :
+        <>
           <h1 className='title'>Meus empréstimos</h1>
-    
-          {openModal && 
-            <div className={styles.modal}>
-              <ModalEdit setOpenModal={setOpenModal} exists={listEmprestimo}/>
-            </div>
-          }
-
-          {openModalNewValue && 
-            <div className={styles.modal}>
-              <ModalNewValue 
-                setOpenModalNewValue={setOpenModalNewValue}
-                nameEmprestimo={nameEmprestimo}
-              />
-            </div>
-          }
-    
-          {listEmprestimo && listEmprestimo.map(emprestimo => (
-            <div key={emprestimo['nome']} className={`${styles.debts}`}>
-              <h1>{emprestimo['nome']}</h1>
-              <div className={styles.values}>
-                <p>Valor emprestado</p>
-                <p>{convert(emprestimo['valor'])}</p>
-              </div>
-    
-              {emprestimo['parcela'] && 
-                <div className={styles.values}>
-                  <p>Parcelas</p>
-                  <p>{`${emprestimo['parcela']} x de ${convert(emprestimo['valor'] / emprestimo['parcela'])}`}</p>
+          {listEmprestimo.length ?
+            <div 
+              className={`
+                container 
+                ${styles.boxDebt}} 
+                ${openModal && styles.active}
+                ${openModalNewValue && styles.active}`
+              }
+            >
+        
+              {openModal && 
+                <div className={styles.modal}>
+                  <ModalEdit setOpenModal={setOpenModal} exists={listEmprestimo}/>
                 </div>
               }
     
-              <div className={styles.values}>
-                <p>Valor pago</p>
-                <p>{convert(emprestimo.valorPago)}</p>
-              </div>
-    
-              <Button 
-                style={{backgroundColor: 'rgb(93, 182, 209)'}}
-                onClick={() => handleClickTwo(emprestimo)}
-                >
-                Inserir valor
-              </Button>
+              {openModalNewValue && 
+                <div className={styles.modal}>
+                  <ModalNewValue 
+                    setOpenModalNewValue={setOpenModalNewValue}
+                    nameEmprestimo={nameEmprestimo}
+                  />
+                </div>
+              }
+        
+              {listEmprestimo && listEmprestimo.map(emprestimo => (
+                <div key={emprestimo['nome']} className={`${styles.debts}`}>
+                  <h1>{emprestimo['nome']}</h1>
+                  <div className={styles.values}>
+                    <p>Valor emprestado</p>
+                    <p>{convert(emprestimo['valor'])}</p>
+                  </div>
+        
+                  {emprestimo['parcela'] && 
+                    <div className={styles.values}>
+                      <p>Parcelas</p>
+                      <p>{`${emprestimo['parcela']} x de ${convert(emprestimo['valor'] / emprestimo['parcela'])}`}</p>
+                    </div>
+                  }
+        
+                  <div className={styles.values}>
+                    <p>Valor pago</p>
+                    <p>{convert(emprestimo.valorPago)}</p>
+                  </div>
+        
+                  <Button 
+                    style={{backgroundColor: 'rgb(93, 182, 209)'}}
+                    onClick={() => handleClickTwo(emprestimo)}
+                    >
+                    Inserir valor
+                  </Button>
+                </div>
+              ))}
+        
+              <Button onClick={handleClick}>Cadastrar</Button>
             </div>
-          ))}
-    
-          <Button onClick={handleClick}>Novo</Button>
-        </div>
-        :
-        <p>Oi</p>
+            :
+            <div className='container'>
+              <p className={styles.notFoundEmprestimos}>Você não fez nenhum empréstimo! :)</p>
+              <Button onClick={handleClick}>Cadastrar</Button>
+            </div>
+          }
+        </>
       }
     </>
   )
