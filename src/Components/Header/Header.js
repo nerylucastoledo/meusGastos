@@ -40,6 +40,7 @@ function Header() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="new-expense">Inserir Gasto</NavLink>
         <NavLink to="new-card">Cadastrar Cartão</NavLink>
+        <NavLink to="debts">Empréstimos</NavLink>
         {logged ? 
           <p onClick={signOut}>Sair</p> 
           : 

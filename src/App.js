@@ -11,6 +11,7 @@ import NewExpense from './Components/NewExpense/NewExpense'
 import LoginRoutes from './Components/Login/LoginRoutes'
 
 import './App.css'
+import Debts from './Components/Debts/Debts'
 
 function App() {
   return (
@@ -44,6 +45,13 @@ function App() {
               element={
                 <ProtectedRoute>
                   <NewExpense />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='debts'
+              element={
+                <ProtectedRoute>
+                  <Debts />
                 </ProtectedRoute>
               }
             />
