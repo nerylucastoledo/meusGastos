@@ -63,11 +63,13 @@ function ModalEdit({ setOpenModal, exists }) {
         <Input 
           type="text" 
           label="Nome do empréstimo" 
+          required
           onChange={({ target }) => setNameDebt(target.value)}
         />
         <Input 
           type="number" 
           label="Valor emprestado" 
+          required
           onChange={({ target }) => setValueDebt(target.value)}
         />
 

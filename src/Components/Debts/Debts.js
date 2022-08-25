@@ -8,10 +8,13 @@ import Button from '../Forms/Button'
 
 import styles from './Debts.module.css'
 import ModalEdit from './ModalEdit/ModalEdit'
+import ModalNewValue from './ModaNewValue/ModalNewValue'
 
 function Debts() {
 
   const [openModal, setOpenModal] = React.useState(false)
+  const [openModalNewValue, setOpenModalNewValue] = React.useState(false)
+  const [nameEmprestimo, setNameEmprestimo] = React.useState(0)
   const [listEmprestimo, setListEmprestimos] = React.useState([])
   
   React.useEffect(() => {
@@ -25,7 +28,8 @@ function Debts() {
     onValue(database, (snapshot) => {
       if (snapshot.exists()) {
         Object.keys(snapshot.val()).forEach(item => {
-          const newItem = snapshot.val()[item]
+          let newItem = snapshot.val()[item]
+          newItem['id'] = item
           if (!listAuxName.includes(newItem['nome'])) {
             listAuxName.push(newItem['nome'])
             listAux.push(newItem)
@@ -35,7 +39,7 @@ function Debts() {
       }
     })
 
-  }, [openModal])
+  }, [openModal, openModalNewValue])
 
   function handleClick() {
     setOpenModal(true)
@@ -45,15 +49,40 @@ function Debts() {
     })
   }
 
+  function handleClickTwo(emprestimo) {
+    setOpenModalNewValue(true)
+    setNameEmprestimo(emprestimo)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
+
   return (
     <>
       {listEmprestimo ?
-        <div className={`container ${styles.boxDebt}} ${openModal && styles.active}`}>
+        <div 
+          className={`
+            container 
+            ${styles.boxDebt}} 
+            ${openModal && styles.active}
+            ${openModalNewValue && styles.active}`
+          }
+        >
           <h1 className='title'>Meus empréstimos</h1>
     
           {openModal && 
             <div className={styles.modal}>
               <ModalEdit setOpenModal={setOpenModal} exists={listEmprestimo}/>
+            </div>
+          }
+
+          {openModalNewValue && 
+            <div className={styles.modal}>
+              <ModalNewValue 
+                setOpenModalNewValue={setOpenModalNewValue}
+                nameEmprestimo={nameEmprestimo}
+              />
             </div>
           }
     
@@ -77,7 +106,12 @@ function Debts() {
                 <p>{convert(emprestimo.valorPago)}</p>
               </div>
     
-              <Button style={{backgroundColor: 'rgb(93, 182, 209)'}}>Inserir valor</Button>
+              <Button 
+                style={{backgroundColor: 'rgb(93, 182, 209)'}}
+                onClick={() => handleClickTwo(emprestimo)}
+                >
+                Inserir valor
+              </Button>
             </div>
           ))}
     
