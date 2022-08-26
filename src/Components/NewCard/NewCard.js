@@ -10,6 +10,7 @@ import {DatabaseContext} from '../../DatabaseContext'
 import style from './NewCard.module.css'
 
 function NewCard() {
+    document.title = 'Gastos | Cadastrar cartão'
     const navigate = useNavigate()
     const { date } = React.useContext(DatabaseContext)
     const displayName = localStorage.getItem('displayName')

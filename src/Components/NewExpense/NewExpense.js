@@ -26,6 +26,7 @@ const months = [
 ]
 
 function NewExpense() {
+    document.title = 'Gastos | Cadastrar gasto'
     const navigate = useNavigate()
     const { date, data, cards, peoples, categorys } = React.useContext(DatabaseContext)
     const displayName = localStorage.getItem('displayName')

@@ -12,6 +12,7 @@ import ModalEdit from './ModalEdit/ModalEdit';
 import styles from './Invoice.module.css'
 
 function Invoice() {
+  document.title = 'Gastos | Fatura'
   const { card } = useParams()
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')

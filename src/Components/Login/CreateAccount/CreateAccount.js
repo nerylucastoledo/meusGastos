@@ -11,6 +11,7 @@ import Button from '../../Forms/Button'
 import styles from './CreateAccount.module.css'
 
 function CreateAccount() {
+  document.title = 'Gastos | Criar conta'
   const auth = getAuth()
   const navigate = useNavigate()
 

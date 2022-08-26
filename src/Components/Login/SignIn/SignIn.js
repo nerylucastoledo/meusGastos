@@ -9,6 +9,7 @@ import Input from '../../Forms/Input'
 import styles from '../CreateAccount/CreateAccount.module.css'
 
 function SignIn() {
+  document.title = 'Gastos | Login'
   const auth = getAuth()
   const navigate = useNavigate()
 

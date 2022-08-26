@@ -29,6 +29,8 @@ const months = [
 const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
 
 function Dashboard() {
+  document.title = 'Gastos | Home'
+  
   const date = new Date()
   const { setDate, data, cards, loading, categorys } = React.useContext(DatabaseContext)
   const [dateFilter, setDateFilter] = React.useState(months[date.getMonth()] + date.getFullYear())

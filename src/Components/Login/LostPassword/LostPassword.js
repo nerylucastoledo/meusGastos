@@ -9,6 +9,7 @@ import Input from '../../Forms/Input'
 import styles from '../CreateAccount/CreateAccount.module.css'
 
 function LostPassword() {
+  document.title = 'Gastos | Perdeu a senha'
   const auth = getAuth()
 
   const [email, setEmail] = React.useState()

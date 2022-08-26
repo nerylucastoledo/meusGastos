@@ -12,7 +12,7 @@ import Loading from '../Loading/Loading'
 import styles from './Debts.module.css'
 
 function Debts() {
-
+  document.title = 'Gastos | Novo empréstimo'
   const [openModal, setOpenModal] = React.useState(false)
   const [openModalNewValue, setOpenModalNewValue] = React.useState(false)
   const [nameEmprestimo, setNameEmprestimo] = React.useState(0)
