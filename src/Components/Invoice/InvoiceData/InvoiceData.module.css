@@ -19,8 +19,13 @@
     border: 1px solid rgb(197, 196, 196);
 }
 
+.active {
+    position: unset !important;
+}
+
 .item {
     margin-right: 10px;
+    max-width: 200px;
 }
 
 .actions {
@@ -41,7 +46,7 @@
     color: rgb(66, 63, 63);
 }
 
-@media (max-width: 420px) {
+@media (max-width: 390px) {
     .dataInvoice {
         display: flex;
         flex-direction: column;

@@ -3,6 +3,7 @@
     grid-template-columns: 2fr 7fr;
     grid-gap: 20px;
     position: relative;
+    margin-bottom: 30px;
 }
 
 .invoice.active:before {

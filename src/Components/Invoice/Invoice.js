@@ -79,6 +79,7 @@ function Invoice() {
             setItemModal={setItemModal}
             setCategoryModal={setCategoryModal}
             setValueModal={setValueModal}
+            active={openModal}
           />
         </div>
       </div>

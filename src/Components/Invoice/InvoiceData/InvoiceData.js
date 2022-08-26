@@ -7,7 +7,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import styles from './InvoiceData.module.css'
 import { convert } from '../../Helpers'
 
-function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategoryModal, setValueModal }) {
+function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategoryModal, setValueModal, active }) {
   const params = useParams()
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')
@@ -45,11 +45,14 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
     <div className={styles.eachInvoice}>
       {nameFilter && data[nameFilter] && total ? 
         Object.keys(data[nameFilter]).map(item => 
-          <div key={item} className={styles.dataInvoice}>
+          <div 
+            key={item} 
+            className={`${active && styles.active} ${styles.dataInvoice}`}
+            >
             <span className={styles.item}>{item}</span>
             <span className={styles.value}>{convert(data[nameFilter][item]['valor'])}</span>
 
-            <div className={styles.actions}>
+            <div className={`${styles.actions} ${active && styles.active} `}>
               <p 
                 className={styles.edit} 
                 onClick={() => handleClickEdit(
