@@ -6,9 +6,9 @@ import { db } from '../../../firebase/firebaseConfig'
 import Input from '../../Forms/Input'
 import Button from '../../Forms/Button'
 
-import styles from './ModalEdit.module.css'
+import styles from './ModalNewEmprestimo.module.css'
 
-function ModalEdit({ setOpenModal, exists }) {
+function ModalNewEmprestimo({ setOpenModal, exists }) {
 
     const [nameDebt, setNameDebt] = React.useState('')
     const [valueDebt, setValueDebt] = React.useState(0)
@@ -56,7 +56,7 @@ function ModalEdit({ setOpenModal, exists }) {
   }
 
   return (
-    <form className={`form-login ${styles.modalEdit}`} onSubmit={submitEdit}>
+    <form className={`form-login ${styles.ModalNewEmprestimo}`} onSubmit={submitEdit}>
         <p className={styles.remove} onClick={() => setOpenModal(false)}>
           X
         </p>
@@ -97,4 +97,4 @@ function ModalEdit({ setOpenModal, exists }) {
   )
 }
 
-export default ModalEdit
+export default ModalNewEmprestimo

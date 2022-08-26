@@ -5,7 +5,7 @@ import { onValue, ref } from "firebase/database"
 import { db } from "../../firebase/firebaseConfig"
 
 import Button from '../Forms/Button'
-import ModalEdit from './ModalEdit/ModalEdit'
+import ModalNewEmprestimo from './ModalNewEmprestimo/ModalNewEmprestimo'
 import ModalNewValue from './ModaNewValue/ModalNewValue'
 import Loading from '../Loading/Loading'
 
@@ -83,7 +83,7 @@ function Debts() {
         
               {openModal && 
                 <div className={styles.modal}>
-                  <ModalEdit setOpenModal={setOpenModal} exists={listEmprestimo}/>
+                  <ModalNewEmprestimo setOpenModal={setOpenModal} exists={listEmprestimo}/>
                 </div>
               }
     
