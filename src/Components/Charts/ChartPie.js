@@ -35,7 +35,7 @@ function ChartPie({ data, categorys }) {
       }
     })
     
-  }, [data])
+  }, [data, categorys])
 
   const state = {
     series: [...seriesCategory],
