@@ -80,13 +80,13 @@ function Debts() {
                 ${openModalNewValue && styles.active}`
               }
             >
-        
+
               {openModal && 
                 <div className={styles.modal}>
                   <ModalNewEmprestimo setOpenModal={setOpenModal} exists={listEmprestimo}/>
                 </div>
               }
-    
+
               {openModalNewValue && 
                 <div className={styles.modal}>
                   <ModalNewValue 
@@ -128,7 +128,14 @@ function Debts() {
               <Button onClick={handleClick}>Cadastrar</Button>
             </div>
             :
-            <div className='container'>
+            <div className={`container ${openModal && styles.active}`}>
+
+              {openModal && 
+                <div className={styles.modal}>
+                  <ModalNewEmprestimo setOpenModal={setOpenModal} exists={listEmprestimo}/>
+                </div>
+              }
+
               <p className={styles.notFoundEmprestimos}>Você não fez nenhum empréstimo! :)</p>
               <Button onClick={handleClick}>Cadastrar</Button>
             </div>
