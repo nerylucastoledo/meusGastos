@@ -38,11 +38,13 @@ function NewExpense() {
     const [category, setCategory] = React.useState('')
     const [newCategory, setNewCategory] = React.useState('')
     const [card, setCard] = React.useState('')
-    const [cardInstallment, setCardInstallment] = React.useState('')
+    const [cardInstallment, setCardInstallment] = React.useState(0)
     const [checked, setChecked] = React.useState(false)
+    const [loading, setLoading] = React.useState(false)
 
     function sendExpense(event) {
         event.preventDefault()
+        setLoading(true)
 
         const nameValidated = people === 'Nova' ? newPeople : people
         const categoryValidated = category === 'Nova' ? newCategory : category
@@ -61,14 +63,14 @@ function NewExpense() {
                 var nameItem = `${item} ${index + 1}-${cardInstallment}`
                 var month = `${months[indexOfMonth]}20${currentYear}`
 
-                saveDataWithCardAndPeople(nameItem, nameValidated, categoryValidated, month)
+                saveDataWithCardAndPeople(nameItem, nameValidated, categoryValidated, month, index)
             }
         } else {
             saveDataWithCardAndPeople(item, nameValidated, categoryValidated, date)
         }
     }
 
-    function saveDataWithCardAndPeople(nameItem, namePeople, nameCategory, month) {
+    function saveDataWithCardAndPeople(nameItem, namePeople, nameCategory, month, index = 0) {
         const url = `${displayName}/${month}/${card}/${namePeople}`
         const body = {
             [nameItem]: {
@@ -77,10 +79,10 @@ function NewExpense() {
             }
         }
         const result = verifyExistsData(url)
-        result ? saveDataOnDatabase(url, body) : saveDataWithCard(nameItem, namePeople, nameCategory, month)
+        result ? saveDataOnDatabase(url, body, index) : saveDataWithCard(nameItem, namePeople, nameCategory, month, index)
     }
 
-    function saveDataWithCard(nameItem, namePeople, nameCategory, month) {
+    function saveDataWithCard(nameItem, namePeople, nameCategory, month, index = 0) {
         const url = `${displayName}/${month}/${card}`
         const body = {
             [namePeople]: {
@@ -91,10 +93,10 @@ function NewExpense() {
             }
         }
         const result = verifyExistsData(url)
-        result ? saveDataOnDatabase(url, body) : saveDataToNeWCard(nameItem, namePeople, nameCategory, month)
+        result ? saveDataOnDatabase(url, body, index) : saveDataToNeWCard(nameItem, namePeople, nameCategory, month, index)
     }
 
-    function saveDataToNeWCard(nameItem, namePeople, nameCategory, month) {
+    function saveDataToNeWCard(nameItem, namePeople, nameCategory, month, index = 0) {
         const url = `${displayName}/${month}`
         const cor = data[card]['cor']
         const body = {
@@ -108,7 +110,7 @@ function NewExpense() {
                 cor: cor
             }
         }
-        saveDataOnDatabase(url, body)
+        saveDataOnDatabase(url, body, index)
     }
 
     function verifyExistsData(url) {
@@ -118,9 +120,15 @@ function NewExpense() {
         return result
     }
 
-    async function saveDataOnDatabase(url, body) {
+    async function saveDataOnDatabase(url, body, index = 0) {
         await update(ref(db, url), body)
-        .then(() => navigate('/'))
+        .then(() => {
+            if (Number(cardInstallment) - 1 === Number(index)) {
+                setLoading(false)
+                navigate('/')
+            }
+            return
+        })
     }
 
   return (
@@ -216,7 +224,7 @@ function NewExpense() {
                 onChange={({ target }) => setValue(target.value)}
             />
 
-            <Button>Inserir gasto</Button>
+            {loading ? <Button disabled>Inserindo...</Button> : <Button>Inserir gasto</Button>}
         </form>
     </div>
   )

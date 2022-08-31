@@ -6,6 +6,8 @@ function ChartPie({ data, categorys }) {
   const [seriesCategory, setSeriesCategory] = React.useState([])
 
   React.useEffect(() => {
+    setLabelCategory([])
+    setSeriesCategory([])
     var objetAux = {}
     filterCard()
 
