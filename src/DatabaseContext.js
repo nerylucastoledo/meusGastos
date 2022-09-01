@@ -7,6 +7,7 @@ export const DatabaseContext = React.createContext()
 
 export function DatabaseStorage( {children }) {
     const [data, setData]= React.useState([])
+    const [allData, setAllData]= React.useState([])
     const [cards, setCards]= React.useState([])
     const [categorys, setCategorys]= React.useState([])
     const [peoples, setPeoples]= React.useState([])
@@ -20,13 +21,14 @@ export function DatabaseStorage( {children }) {
         const displayName = localStorage.getItem('displayName')
 
         if (displayName && date) {
-            const database = ref(db, `${displayName}/${date}`)
+            const database = ref(db, `${displayName}`)
 
             onValue(database, (snapshot) => {
+                setAllData(snapshot.val())
                 if (snapshot.exists()) {
-                    setData(snapshot.val())
-                    setCards(Object.keys(snapshot.val()))
-                    getPeoples(snapshot.val())
+                    setData(snapshot.val()[date])
+                    setCards(Object.keys(snapshot.val()[date]))
+                    getPeoples(snapshot.val()[date])
                 } else {
                     setData({})
                 }
@@ -59,6 +61,7 @@ export function DatabaseStorage( {children }) {
     return (
         <DatabaseContext.Provider value={{ 
                 data, 
+                allData,
                 date,
                 cards,
                 categorys,

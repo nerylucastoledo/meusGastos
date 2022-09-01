@@ -30,7 +30,7 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
     if (window.confirm('Quer realmente deletar?')) {
       // colocar notificacao
       remove(ref(db, url))
-      .then(() =>  console.log('deu certo'))
+      .then(() => setTotal(0))
     }
   }
 

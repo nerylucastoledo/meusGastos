@@ -11,6 +11,7 @@ import TotalUser from '../TotalUser/TotalUser'
 import Loading from '../../Loading/Loading'
 
 import styles from './Dashboard.module.css'
+import ChartLine from '../../Charts/ChartLine'
 
 const months = [
   'janeiro', 
@@ -67,6 +68,10 @@ function Dashboard() {
                 data={data}
                 categorys={categorys}
               />
+
+              <div style={{marginTop: '30px'}}>
+                <ChartLine />
+              </div>
 
               <TotalUser data={data}/>
             </div>
