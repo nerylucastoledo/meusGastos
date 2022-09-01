@@ -28,7 +28,7 @@ const months = [
 function NewExpense() {
     document.title = 'Gastos | Cadastrar gasto'
     const navigate = useNavigate()
-    const { date, data, cards, peoples, categorys } = React.useContext(DatabaseContext)
+    const { date, setDate, data, cards, peoples, categorys } = React.useContext(DatabaseContext)
     const displayName = localStorage.getItem('displayName')
 
     const [item, setItem] = React.useState('')
@@ -78,8 +78,8 @@ function NewExpense() {
                 categoria: nameCategory
             }
         }
-        const result = verifyExistsData(url)
-        result ? saveDataOnDatabase(url, body, index) : saveDataWithCard(nameItem, namePeople, nameCategory, month, index)
+        let database = ref(db, url)
+        onValue(database, (snapshot => snapshot.exists() ? saveDataOnDatabase(url, body, index) : saveDataWithCard(nameItem, namePeople, nameCategory, month, index)))
     }
 
     function saveDataWithCard(nameItem, namePeople, nameCategory, month, index = 0) {
@@ -92,8 +92,8 @@ function NewExpense() {
                 }
             }
         }
-        const result = verifyExistsData(url)
-        result ? saveDataOnDatabase(url, body, index) : saveDataToNeWCard(nameItem, namePeople, nameCategory, month, index)
+        let database = ref(db, url)
+        onValue(database, (snapshot => snapshot.exists() ? saveDataOnDatabase(url, body, index) : saveDataToNeWCard(nameItem, namePeople, nameCategory, month, index)))
     }
 
     function saveDataToNeWCard(nameItem, namePeople, nameCategory, month, index = 0) {
@@ -113,17 +113,11 @@ function NewExpense() {
         saveDataOnDatabase(url, body, index)
     }
 
-    function verifyExistsData(url) {
-        let result
-        const database = ref(db, url)
-        onValue(database, (snapshot => result = snapshot.exists()))
-        return result
-    }
-
     async function saveDataOnDatabase(url, body, index = 0) {
         await update(ref(db, url), body)
         .then(() => {
             if (Number(cardInstallment) - 1 === Number(index)) {
+                setDate(date)
                 setLoading(false)
                 navigate('/')
             }
