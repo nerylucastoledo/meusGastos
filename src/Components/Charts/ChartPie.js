@@ -9,11 +9,8 @@ function ChartPie({ data, categorys }) {
     setLabelCategory([])
     setSeriesCategory([])
     var objetAux = {}
-    filterCard()
 
-    function filterCard() {
-      Object.keys(data).forEach(card => filterPeople(card))
-    }
+    Object.keys(data).forEach(card => filterPeople(card))
 
     function filterPeople(card) {
       if (data[card]['Eu']) {

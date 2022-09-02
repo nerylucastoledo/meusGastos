@@ -24,66 +24,66 @@ function ChartLine() {
     const [monthsTotal, setMonthsTotal] = React.useState([])
 
     React.useEffect(() => {
-        setValuesTotal([])
-        setMonthsTotal([])
+      setValuesTotal([])
+      setMonthsTotal([])
 
-        var [currentMonth, currentYear] = date.split(20)
-        var indexOfMonth = months.indexOf(currentMonth)
+      var [currentMonth, currentYear] = date.split(20)
+      var indexOfMonth = months.indexOf(currentMonth)
 
-        for (let i = indexOfMonth; i >= 0; i--) {
-            setMonthsTotal((last) => [...last, months[i]])
-            filterCards(months[i], currentYear)
-        }
+      for (let i = indexOfMonth; i >= 0; i--) {
+        setMonthsTotal((last) => [...last, months[i]])
+        filterCards(months[i], currentYear)
+      }
 
-        function filterCards(month, year) {
-            let SumValue = 0
+      function filterCards(month, year) {
+        let SumValue = 0
+        const monthAndYear = `${month}20${year}`
 
-            const dateModified = `${month}20${year}`
-            Object.keys(allData[dateModified]).forEach(card => {
-                if (allData[dateModified][card]['Eu']) {
-                    Object.keys(allData[dateModified][card]['Eu']).forEach(item => {
-                        SumValue += allData[dateModified][card]['Eu'][item]['valor']
-                    })
-                }
+        Object.keys(allData[monthAndYear]).forEach(card => {
+          const dataFromCardToMe = allData[monthAndYear][card]['Eu']
+
+          if (dataFromCardToMe) {
+            Object.keys(dataFromCardToMe).forEach(item => {
+              SumValue += dataFromCardToMe[item]['valor']
             })
-            setValuesTotal((last) => [...last, SumValue.toFixed(2)])
-        }
+          }
+        })
+        setValuesTotal((last) => [...last, SumValue.toFixed(2)])
+      }
     }, [allData, date])
 
     const state = {
-        series: [{
-            name: "Gastos",
-            data: valuesTotal.reverse()
-        }],
-        options: {
-          chart: {
-            height: 350,
-            type: 'line',
-            zoom: {
-              enabled: false
-            }
-          },
-          dataLabels: {
+      series: [{
+        name: "Gastos",
+        data: valuesTotal.reverse()
+      }],
+      options: {
+        chart: {
+          zoom: {
             enabled: false
-          },
-          stroke: {
-            curve: 'straight'
-          },
-          title: {
-            text: 'Gastos por meses do ano',
-            align: 'left'
-          },
-          grid: {
-            row: {
-              colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-              opacity: 0.5
-            },
-          },
-          xaxis: {
-            categories: monthsTotal.reverse()
           }
         },
-      }
+        dataLabels: {
+          enabled: true
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Gastos por meses do ano',
+          align: 'left'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'],
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: monthsTotal.reverse()
+        }
+      },
+    }
 
   return (
     <div className="app">
@@ -93,7 +93,7 @@ function ChartLine() {
             options={state.options}
             series={state.series}
             type="line"
-            height={350}
+            height={250}
           />
         </div>
       </div>

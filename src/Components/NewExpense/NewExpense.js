@@ -116,7 +116,7 @@ function NewExpense() {
     async function saveDataOnDatabase(url, body, index = 0) {
         await update(ref(db, url), body)
         .then(() => {
-            if (Number(cardInstallment) - 1 === Number(index)) {
+            if (Number(cardInstallment) === 0 || Number(cardInstallment) - 1 === Number(index)) {
                 setDate(date)
                 setLoading(false)
                 navigate('/')
