@@ -213,6 +213,8 @@ function NewExpense() {
             <Input
                 type="number"
                 id="valor"
+                min="0"
+                step="0.01"
                 label="Valor"
                 placeholder="Qual o valor?"
                 required

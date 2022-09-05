@@ -53,6 +53,7 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
         />
         <Input
           type="number"
+          step="0.01"
           label="Valor"
           value={editValue}
           onChange={({ target }) => setEditValue(target.value)}
