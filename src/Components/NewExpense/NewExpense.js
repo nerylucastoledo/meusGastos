@@ -152,8 +152,9 @@ function NewExpense() {
             <select defaultValue="" required onChange={({ target }) => setPeople(target.value)}>
                 <option value="" disabled>Seleciona a pessoa</option>
                 <option value="Nova">Nova pessoa</option>
+                <option value="Eu">Eu</option>
                 {peoples.map(people =>
-                    <option key={people} value={people}>{people}</option>
+                    {people !== 'Eu' && <option key={people} value={people}>{people}</option>}
                 )}
             </select>
 

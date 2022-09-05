@@ -26,7 +26,7 @@ export function DatabaseStorage({ children }) {
 
             onValue(database, (snapshot) => {
                 setAllData(snapshot.val())
-                if (snapshot.exists()) {
+                if (snapshot.exists() && snapshot.val()[date]) {
                     setData(snapshot.val()[date])
                     setCards(Object.keys(snapshot.val()[date]))
                     getPeoples(snapshot.val()[date])

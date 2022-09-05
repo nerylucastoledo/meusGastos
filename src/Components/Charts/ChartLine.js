@@ -39,16 +39,18 @@ function ChartLine() {
         let SumValue = 0
         const monthAndYear = `${month}20${year}`
 
-        Object.keys(allData[monthAndYear]).forEach(card => {
-          const dataFromCardToMe = allData[monthAndYear][card]['Eu']
+        if (allData[monthAndYear]) {
+          Object.keys(allData[monthAndYear]).forEach(card => {
+            const dataFromCardToMe = allData[monthAndYear][card]['Eu']
 
-          if (dataFromCardToMe) {
-            Object.keys(dataFromCardToMe).forEach(item => {
-              SumValue += dataFromCardToMe[item]['valor']
-            })
-          }
-        })
-        setValuesTotal((last) => [...last, SumValue.toFixed(2)])
+            if (dataFromCardToMe) {
+              Object.keys(dataFromCardToMe).forEach(item => {
+                SumValue += dataFromCardToMe[item]['valor']
+              })
+            }
+          })
+        }
+        if(SumValue) setValuesTotal((last) => [...last, SumValue.toFixed(2)])
       }
     }, [allData, date])
 
@@ -87,16 +89,18 @@ function ChartLine() {
 
   return (
     <div className="app">
-      <div className="row">
-        <div className="mixed-chart">
-          <Chart
-            options={state.options}
-            series={state.series}
-            type="line"
-            height={250}
-          />
+      {valuesTotal.length && monthsTotal.length ? (
+        <div className="row">
+          <div className="mixed-chart">
+            <Chart
+              options={state.options}
+              series={state.series}
+              type="line"
+              height={250}
+            />
+          </div>
         </div>
-      </div>
+      ) : <p></p>}
     </div>
   )
 }

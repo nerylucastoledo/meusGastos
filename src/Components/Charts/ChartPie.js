@@ -57,15 +57,17 @@ function ChartPie({ data, categorys }) {
 
   return (
     <div className="app">
-      <div className="row">
-        <div className="mixed-chart">
-          <Chart
-            options={state.chartOptions}
-            series={state.series}
-            type="donut"
-          />
+      {labelCategory.length && seriesCategory.length ? (
+        <div className="row">
+          <div className="mixed-chart">
+            <Chart
+              options={state.chartOptions}
+              series={state.series}
+              type="donut"
+            />
+          </div>
         </div>
-      </div>
+      ) : <p></p>}
     </div>
   )
 }

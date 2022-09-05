@@ -17,8 +17,6 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')
 
-  console.log(typeof setOpenModal)
-
   const [total, setTotal] = React.useState(0)
 
   React.useEffect(() => {
@@ -90,7 +88,10 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
 
 export default InvoiceData
 InvoiceData.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   nameFilter: PropTypes.string,
   setOpenModal: PropTypes.func,
   setItemModal: PropTypes.func,
