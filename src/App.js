@@ -13,6 +13,7 @@ import LoginRoutes from './Components/Login/LoginRoutes'
 
 import './App.css'
 import Debts from './Components/Debts/Debts'
+import PageNotFound from './Components/PageNotFound/PageNotFound'
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
               }
             />
             <Route path='login/*' element={<LoginRoutes />}></Route>
+            <Route path='*' element={<PageNotFound />}></Route>
           </Routes>
         </main>
       </BrowserRouter>
