@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import { DatabaseContext } from '../../../DatabaseContext'
@@ -14,24 +15,24 @@ import styles from './Dashboard.module.css'
 import ChartLine from '../../Charts/ChartLine'
 
 const months = [
-  'janeiro', 
-  'fevereiro', 
-  'março', 
-  'abril', 
-  'maio', 
-  'junho', 
-  'julho', 
-  'agosto', 
-  'setembro', 
-  'outubro', 
-  'novembro', 
+  'janeiro',
+  'fevereiro',
+  'março',
+  'abril',
+  'maio',
+  'junho',
+  'julho',
+  'agosto',
+  'setembro',
+  'outubro',
+  'novembro',
   'dezembro'
 ]
 const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030']
 
 function Dashboard() {
   document.title = 'Gastos | Home'
-  
+
   const date = new Date()
   const { setDate, data, cards, loading, categorys } = React.useContext(DatabaseContext)
   const [dateFilter, setDateFilter] = React.useState(months[date.getMonth()] + date.getFullYear())
@@ -42,29 +43,29 @@ function Dashboard() {
 
   return (
     <section className='container'>
-      <DashboardFilter 
-        setDateFilter={setDateFilter} 
+      <DashboardFilter
+        setDateFilter={setDateFilter}
         monthToday={months[date.getMonth()]}
         yearToday={date.getFullYear()}
         months={months}
         years={years}
       />
 
-      {loading ? 
-        <Loading /> 
+      {loading ?
+        <Loading />
         :
         <>
           {Object.keys(data).length ?
             <div>
               {cards.map((card) => (
-                <DashboardCards 
-                  key={card} 
-                  data={data[card]} 
+                <DashboardCards
+                  key={card}
+                  data={data[card]}
                   card={card}k
                 />
               ))}
 
-              <ChartPie 
+              <ChartPie
                 data={data}
                 categorys={categorys}
               />

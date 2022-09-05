@@ -1,3 +1,4 @@
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { DatabaseStorage } from './DatabaseContext'
@@ -20,7 +21,7 @@ function App() {
         <Header />
         <main className="App">
           <Routes>
-            <Route path='/' 
+            <Route path='/'
               element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -34,7 +35,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path='new-card' 
+            <Route path='new-card'
               element={
                 <ProtectedRoute>
                   <NewCard />

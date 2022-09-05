@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { ref, update } from 'firebase/database'
 import { db } from '../../../firebase/firebaseConfig'
@@ -60,22 +61,22 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
         <p className={styles.remove} onClick={() => setOpenModal(false)}>
           X
         </p>
-        <Input 
-          type="text" 
-          label="Nome do empréstimo" 
+        <Input
+          type="text"
+          label="Nome do empréstimo"
           required
           onChange={({ target }) => setNameDebt(target.value)}
         />
-        <Input 
-          type="number" 
-          label="Valor emprestado" 
+        <Input
+          type="number"
+          label="Valor emprestado"
           required
           onChange={({ target }) => setValueDebt(target.value)}
         />
 
         <div className={styles.boxCheckbox}>
           <label>
-            <input 
+            <input
               type="checkbox"
               checked={checked}
               onChange={() => setChecked(!checked)}
@@ -85,9 +86,9 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
         </div>
 
         {checked &&
-            <Input 
-                type="number" 
-                label="Quantidade de parcelas" 
+            <Input
+                type="number"
+                label="Quantidade de parcelas"
                 onChange={({ target }) => setValueParcelas(target.value)}
             />
         }
@@ -98,3 +99,8 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
 }
 
 export default ModalNewEmprestimo
+
+ModalNewEmprestimo.propTypes = {
+  setOpenModal: PropTypes.boolean,
+  exists: PropTypes.array,
+}

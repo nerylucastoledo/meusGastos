@@ -51,9 +51,9 @@ function Invoice() {
       </div>
 
       <div className={`${styles.invoice} ${openModal && styles.active}`}>
-        {openModal && 
+        {openModal &&
           <div className={styles.modal}>
-            <ModalEdit 
+            <ModalEdit
               item={itemModal}
               category={categoryModal}
               value={valueModal}
@@ -64,17 +64,17 @@ function Invoice() {
         }
         <div>
           {peoples.map(people => (
-            <InvoicePeople 
-              key={people} 
-              people={people} 
-              setNameFilter={setNameFilter} 
+            <InvoicePeople
+              key={people}
+              people={people}
+              setNameFilter={setNameFilter}
               color={listData['cor']}
-            />  
+            />
           ))}
         </div>
         <div>
-          <InvoiceData 
-            data={listData} 
+          <InvoiceData
+            data={listData}
             nameFilter={nameFilter}
             setOpenModal={setOpenModal}
             setItemModal={setItemModal}

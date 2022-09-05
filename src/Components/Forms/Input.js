@@ -1,10 +1,10 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 function Input({ label, id, type, ...props }) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      <input 
+      <input
         type={type}
         id={id}
         name={id}
@@ -15,3 +15,8 @@ function Input({ label, id, type, ...props }) {
 }
 
 export default Input
+Input.propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.string,
+  type: PropTypes.string,
+}

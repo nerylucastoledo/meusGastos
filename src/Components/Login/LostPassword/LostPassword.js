@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
@@ -38,7 +39,7 @@ function LostPassword() {
       <form className='form-login' onSubmit={resetPassword}>
         {error && <p className={styles.error}>{error}</p>}
 
-        {emailSending ? 
+        {emailSending ?
           <>
             <p className='send-password'>E-mail enviado com sucesso!</p>
             <Link to={'/login'}>

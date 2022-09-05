@@ -1,16 +1,23 @@
-import { ref, remove } from 'firebase/database'
 import React from 'react'
+import PropTypes from 'prop-types'
+
+import { ref, remove } from 'firebase/database'
+import { db } from '../../../firebase/firebaseConfig'
+
 import { useParams } from 'react-router-dom'
 import { DatabaseContext } from '../../../DatabaseContext'
-import { db } from '../../../firebase/firebaseConfig'
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import styles from './InvoiceData.module.css'
+
 import { convert } from '../../Helpers'
+
+import styles from './InvoiceData.module.css'
 
 function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategoryModal, setValueModal, active }) {
   const params = useParams()
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')
+
+  console.log(typeof setOpenModal)
 
   const [total, setTotal] = React.useState(0)
 
@@ -43,21 +50,21 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
 
   return (
     <div className={styles.eachInvoice}>
-      {nameFilter && data[nameFilter] && total ? 
-        Object.keys(data[nameFilter]).map(item => 
-          <div 
-            key={item} 
+      {nameFilter && data[nameFilter] && total ?
+        Object.keys(data[nameFilter]).map(item =>
+          <div
+            key={item}
             className={`${active && styles.active} ${styles.dataInvoice}`}
             >
             <span className={styles.item}>{item}</span>
             <span className={styles.value}>{convert(data[nameFilter][item]['valor'])}</span>
 
             <div className={`${styles.actions} ${active && styles.active} `}>
-              <p 
-                className={styles.edit} 
+              <p
+                className={styles.edit}
                 onClick={() => handleClickEdit(
-                  item, 
-                  data[nameFilter][item]['categoria'], 
+                  item,
+                  data[nameFilter][item]['categoria'],
                   data[nameFilter][item]['valor']
                 )}
                 >
@@ -68,7 +75,7 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
               </p>
             </div>
           </div>
-        ) : 
+        ) :
         <p style={{ textAlign: 'center', marginTop: '10px'}}>
           Nenhum dado disponível :(
         </p>
@@ -82,3 +89,12 @@ function InvoiceData({ data, nameFilter, setOpenModal, setItemModal, setCategory
 }
 
 export default InvoiceData
+InvoiceData.propTypes = {
+  data: PropTypes.array,
+  nameFilter: PropTypes.string,
+  setOpenModal: PropTypes.func,
+  setItemModal: PropTypes.func,
+  setCategoryModal: PropTypes.func,
+  setValueModal: PropTypes.func,
+  active: PropTypes.boolean,
+}

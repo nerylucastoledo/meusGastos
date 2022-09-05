@@ -1,17 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Input from '../Forms/Input'
 import Button from '../Forms/Button'
 
 import { useNavigate } from 'react-router-dom'
 import { db } from '../../firebase/firebaseConfig'
 import { onValue, ref, update } from 'firebase/database'
-import {DatabaseContext} from '../../DatabaseContext' 
+import {DatabaseContext} from '../../DatabaseContext'
 
 import style from './NewCard.module.css'
 
 function NewCard() {
     document.title = 'Gastos | Cadastrar cartão'
-    
+
     const navigate = useNavigate()
     const { date } = React.useContext(DatabaseContext)
     const displayName = localStorage.getItem('displayName')
@@ -42,7 +44,7 @@ function NewCard() {
         <h1 className='title'>Novo cartão</h1>
         <form className='form-login' onSubmit={newCard}>
             <div className={style.colorCard}>
-                <Input 
+                <Input
                     type="color"
                     label="Cor do cartão"
                     id="colorCard"
@@ -51,22 +53,22 @@ function NewCard() {
                 />
 
                 {colorCard &&
-                    <div 
+                    <div
                         className={style.boxColor}
                         style={{backgroundColor: colorCard}}
                         >
                     </div>
                 }
-            </div>  
-            
-            <Input 
+            </div>
+
+            <Input
                 type="text"
                 label="Nome do cartão"
                 id="nameCard"
                 required
                 placeholder="Qual o nome?"
                 onChange={({ target }) => setNameCard(target.value)}
-            />    
+            />
             <Button>Cadastrar</Button>
         </form>
     </div>

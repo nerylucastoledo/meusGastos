@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../../../firebase/firebaseConfig';
@@ -73,10 +74,10 @@ function CreateAccount() {
           onChange={({ target }) => setEmail(target.value)}
         />
 
-        <Input 
-          label="Usuário" 
-          id="usuario" 
-          type="text" 
+        <Input
+          label="Usuário"
+          id="usuario"
+          type="text"
           placeholder="Seu usuário"
           required
           onChange={({target}) => setUsuario(target.value)}

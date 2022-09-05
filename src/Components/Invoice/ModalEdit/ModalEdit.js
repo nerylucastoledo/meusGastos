@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { db } from '../../../firebase/firebaseConfig'
 import { ref, update } from 'firebase/database'
@@ -14,7 +15,7 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
   const params = useParams()
   const { date } = React.useContext(DatabaseContext)
   const displayName = localStorage.getItem('displayName')
-  
+
   const [editCategory, setEditCategory] = React.useState(category)
   const [editValue, setEditValue] = React.useState(value)
 
@@ -37,22 +38,22 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
         <p className={style.remove} onClick={() => setOpenModal(false)}>
           X
         </p>
-        <Input 
-          type="text" 
-          label="Item" 
-          value={item} 
+        <Input
+          type="text"
+          label="Item"
+          value={item}
           disabled
           style={{ backgroundColor: '#eee'}}
         />
-        <Input 
-          type="text" 
-          label="Categoria" 
+        <Input
+          type="text"
+          label="Categoria"
           value={editCategory}
           onChange={({ target }) => setEditCategory(target.value)}
         />
-        <Input 
-          type="number" 
-          label="Valor" 
+        <Input
+          type="number"
+          label="Valor"
           value={editValue}
           onChange={({ target }) => setEditValue(target.value)}
         />
@@ -62,3 +63,10 @@ function ModalEdit({ item, category, value, setOpenModal, nameFilter }) {
 }
 
 export default ModalEdit
+ModalEdit.propTypes = {
+  item: PropTypes.string,
+  category: PropTypes.string,
+  value: PropTypes.number,
+  setOpenModal: PropTypes.func,
+  nameFilter: PropTypes.string
+}

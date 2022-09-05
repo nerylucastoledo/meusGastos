@@ -30,7 +30,7 @@ function Header() {
         <img src={logo} alt="Logo do site" />
       </Link>
 
-      <button 
+      <button
         aria-label='Menu'
         className={`${styles.mobileButton} ${mobileMenu && styles.mobileButtonActive}`}
         onClick={() => setMobileMenu(!mobileMenu)}>
@@ -41,9 +41,9 @@ function Header() {
         <NavLink to="new-expense">Inserir Gasto</NavLink>
         <NavLink to="new-card">Cadastrar Cartão</NavLink>
         <NavLink to="debts">Empréstimos</NavLink>
-        {logged ? 
-          <p onClick={signOut}>Sair</p> 
-          : 
+        {logged ?
+          <p onClick={signOut}>Sair</p>
+          :
           <NavLink to="login">Login</NavLink>
         }
       </nav>

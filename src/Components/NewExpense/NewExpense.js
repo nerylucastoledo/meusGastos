@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { useNavigate } from 'react-router-dom'
 import { db } from '../../firebase/firebaseConfig'
@@ -11,17 +12,17 @@ import Input from '../Forms/Input'
 import style from './NewExpense.module.css'
 
 const months = [
-    'janeiro', 
-    'fevereiro', 
-    'março', 
-    'abril', 
-    'maio', 
-    'junho', 
-    'julho', 
-    'agosto', 
-    'setembro', 
-    'outubro', 
-    'novembro', 
+    'janeiro',
+    'fevereiro',
+    'março',
+    'abril',
+    'maio',
+    'junho',
+    'julho',
+    'agosto',
+    'setembro',
+    'outubro',
+    'novembro',
     'dezembro'
 ]
 
@@ -133,7 +134,7 @@ function NewExpense() {
             <label>Cartão</label>
             <select defaultValue="" required onChange={({ target }) => setCard(target.value)}>
                 <option value="" disabled>Seleciona o cartão</option>
-                {cards.map(card => 
+                {cards.map(card =>
                     <option key={card} value={card}>{card}</option>
                 )}
             </select>
@@ -146,12 +147,12 @@ function NewExpense() {
                 required
                 onChange={({ target }) => setItem(target.value)}
             />
-            
+
             <label>Pessoa</label>
             <select defaultValue="" required onChange={({ target }) => setPeople(target.value)}>
                 <option value="" disabled>Seleciona a pessoa</option>
                 <option value="Nova">Nova pessoa</option>
-                {peoples.map(people => 
+                {peoples.map(people =>
                     <option key={people} value={people}>{people}</option>
                 )}
             </select>
@@ -171,7 +172,7 @@ function NewExpense() {
             <select defaultValue="" required onChange={({ target }) => setCategory(target.value)}>
                 <option value="" disabled>Seleciona a categoria</option>
                 <option value="Nova">Nova categoria</option>
-                {categorys.map(category => 
+                {categorys.map(category =>
                     <option key={category} value={category}>{category}</option>
                 )}
             </select>
@@ -186,10 +187,10 @@ function NewExpense() {
                     onChange={({ target }) => setNewCategory(target.value)}
                 />
             }
-            
+
             <div className={style.boxCheckbox}>
                 <label>
-                    <input 
+                    <input
                         type="checkbox"
                         checked={checked}
                         onChange={() => setChecked(!checked)}

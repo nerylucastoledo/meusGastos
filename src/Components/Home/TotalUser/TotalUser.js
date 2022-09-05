@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { convert } from '../../Helpers'
 import styles from './TotalUser.module.css'
 
@@ -12,7 +14,7 @@ function TotalUser({ data }) {
         function filterCards() {
             Object.keys(data).forEach(card => getValueTotal(card))
         }
-    
+
         function getValueTotal(card) {
             if (data[card]['Eu']) {
                 Object.keys(data[card]['Eu']).forEach(item => {
@@ -31,3 +33,6 @@ function TotalUser({ data }) {
 }
 
 export default TotalUser
+TotalUser.propTypes = {
+    data: PropTypes.object,
+}

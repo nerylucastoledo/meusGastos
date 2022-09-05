@@ -1,10 +1,11 @@
 import React from 'react'
-import styles from './Button.module.css'
+import PropTypes from 'prop-types'
 
+import styles from './Button.module.css'
 function Button({ children, style = {}, ...props }) {
   return (
-    <button 
-      className={styles.button} 
+    <button
+      className={styles.button}
       style={style}
       {...props}
       >
@@ -14,3 +15,7 @@ function Button({ children, style = {}, ...props }) {
 }
 
 export default Button
+Button.propTypes = {
+  children: PropTypes.any,
+  style: PropTypes.object,
+}

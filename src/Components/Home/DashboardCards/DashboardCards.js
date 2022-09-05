@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { useNavigate } from 'react-router-dom'
 import { convert } from '../../Helpers'
 import styles from './DashboardCards.module.css'
@@ -24,10 +26,10 @@ function DashboardCards({ data, card }) {
     }
 
     return (
-        <div 
-            className={styles.cardBox} 
+        <div
+            className={styles.cardBox}
             style={{ backgroundColor: data['cor'] }}
-            onClick={acessInvoice} 
+            onClick={acessInvoice}
             >
             <h1>{card}</h1>
             <p>{convert(valueInvoice)}</p>
@@ -36,3 +38,8 @@ function DashboardCards({ data, card }) {
 }
 
 export default DashboardCards
+
+DashboardCards.propTypes = {
+    data: PropTypes.object,
+    card: PropTypes.string,
+  }

@@ -4,17 +4,17 @@ import Chart from 'react-apexcharts'
 import { DatabaseContext } from '../../DatabaseContext'
 
 const months = [
-    'janeiro', 
-    'fevereiro', 
-    'março', 
-    'abril', 
-    'maio', 
-    'junho', 
-    'julho', 
-    'agosto', 
-    'setembro', 
-    'outubro', 
-    'novembro', 
+    'janeiro',
+    'fevereiro',
+    'março',
+    'abril',
+    'maio',
+    'junho',
+    'julho',
+    'agosto',
+    'setembro',
+    'outubro',
+    'novembro',
     'dezembro'
 ]
 

@@ -18,7 +18,7 @@ function Debts() {
   const [nameEmprestimo, setNameEmprestimo] = React.useState(0)
   const [listEmprestimo, setListEmprestimos] = React.useState([])
   const [loading, setLoading] = React.useState(false)
-  
+
   React.useEffect(() => {
     setLoading(true)
     let listAux = []
@@ -66,13 +66,13 @@ function Debts() {
 
   return (
     <>
-      {loading ? 
+      {loading ?
         <Loading />
         :
         <>
           <h1 className='title'>Meus empréstimos</h1>
           {listEmprestimo.length ?
-            <div 
+            <div
               className={`
                 container 
                 ${styles.boxDebt}} 
@@ -81,21 +81,21 @@ function Debts() {
               }
             >
 
-              {openModal && 
+              {openModal &&
                 <div className={styles.modal}>
                   <ModalNewEmprestimo setOpenModal={setOpenModal} exists={listEmprestimo}/>
                 </div>
               }
 
-              {openModalNewValue && 
+              {openModalNewValue &&
                 <div className={styles.modal}>
-                  <ModalNewValue 
+                  <ModalNewValue
                     setOpenModalNewValue={setOpenModalNewValue}
                     nameEmprestimo={nameEmprestimo}
                   />
                 </div>
               }
-        
+
               {listEmprestimo && listEmprestimo.map(emprestimo => (
                 <div key={emprestimo['nome']} className={`${styles.debts}`}>
                   <h1>{emprestimo['nome']}</h1>
@@ -103,20 +103,20 @@ function Debts() {
                     <p>Valor emprestado</p>
                     <p>{convert(emprestimo['valor'])}</p>
                   </div>
-        
-                  {emprestimo['parcela'] && 
+
+                  {emprestimo['parcela'] &&
                     <div className={styles.values}>
                       <p>Parcelas</p>
                       <p>{`${emprestimo['parcela']} x de ${convert(emprestimo['valor'] / emprestimo['parcela'])}`}</p>
                     </div>
                   }
-        
+
                   <div className={styles.values}>
                     <p>Valor pago</p>
                     <p>{convert(emprestimo.valorPago)}</p>
                   </div>
-        
-                  <Button 
+
+                  <Button
                     style={{backgroundColor: 'rgb(93, 182, 209)'}}
                     onClick={() => handleClickTwo(emprestimo)}
                     >
@@ -124,13 +124,13 @@ function Debts() {
                   </Button>
                 </div>
               ))}
-        
+
               <Button onClick={handleClick}>Cadastrar</Button>
             </div>
             :
             <div className={`container ${openModal && styles.active}`}>
 
-              {openModal && 
+              {openModal &&
                 <div className={styles.modal}>
                   <ModalNewEmprestimo setOpenModal={setOpenModal} exists={listEmprestimo}/>
                 </div>

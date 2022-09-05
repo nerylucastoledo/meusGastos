@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import Chart from 'react-apexcharts'
 
 function ChartPie({ data, categorys }) {
@@ -33,7 +35,7 @@ function ChartPie({ data, categorys }) {
         setSeriesCategory((last) => [...last, objetAux[item]])
       }
     })
-    
+
   }, [data, categorys])
 
   const state = {
@@ -69,3 +71,8 @@ function ChartPie({ data, categorys }) {
 }
 
 export default ChartPie
+
+ChartPie.propTypes = {
+  data: PropTypes.object,
+  categorys: PropTypes.array,
+}

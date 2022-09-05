@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { ref, update } from 'firebase/database'
 import { db } from '../../../firebase/firebaseConfig'
@@ -32,9 +33,9 @@ function ModalNewValue({ setOpenModalNewValue, nameEmprestimo }) {
           X
         </p>
 
-        <Input 
-          type="number" 
-          label="Pagar a quantia de" 
+        <Input
+          type="number"
+          label="Pagar a quantia de"
           required
           onChange={({ target }) => setValue(target.value)}
         />
@@ -45,3 +46,8 @@ function ModalNewValue({ setOpenModalNewValue, nameEmprestimo }) {
 }
 
 export default ModalNewValue
+
+ModalNewValue.propTypes = {
+  setOpenModalNewValue: PropTypes.boolean,
+  nameEmprestimo: PropTypes.object,
+}

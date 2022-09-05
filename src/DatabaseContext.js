@@ -1,20 +1,21 @@
-import React from "react"
+import React, { createContext, useEffect, useState } from "react"
+import PropTypes from 'prop-types'
 
 import { onValue, ref } from "firebase/database"
 import { db } from "./firebase/firebaseConfig"
 
-export const DatabaseContext = React.createContext()
+export const DatabaseContext = createContext()
 
-export function DatabaseStorage( {children }) {
-    const [data, setData]= React.useState([])
-    const [allData, setAllData]= React.useState([])
-    const [cards, setCards]= React.useState([])
-    const [categorys, setCategorys]= React.useState([])
-    const [peoples, setPeoples]= React.useState([])
-    const [date, setDate]= React.useState()
-    const [loading, setLoading]= React.useState(false)
+export function DatabaseStorage({ children }) {
+    const [data, setData]= useState([])
+    const [allData, setAllData]= useState([])
+    const [cards, setCards]= useState([])
+    const [categorys, setCategorys]= useState([])
+    const [peoples, setPeoples]= useState([])
+    const [date, setDate]= useState()
+    const [loading, setLoading]= useState(false)
 
-    React.useEffect(() => {
+    useEffect(() => {
         setLoading(true)
         let peoplesAux = []
         let cateroysAux = []
@@ -47,7 +48,7 @@ export function DatabaseStorage( {children }) {
             })
             setPeoples(peoplesAux)
         }
-    
+
         function getCategorys(values, card, people) {
             Object.keys(values[card][people]).forEach(item => {
                 const category = values[card][people][item]['categoria']
@@ -59,8 +60,8 @@ export function DatabaseStorage( {children }) {
     }, [date])
 
     return (
-        <DatabaseContext.Provider value={{ 
-                data, 
+        <DatabaseContext.Provider value={{
+                data,
                 allData,
                 date,
                 cards,
@@ -73,4 +74,8 @@ export function DatabaseStorage( {children }) {
             {children}
         </DatabaseContext.Provider>
     )
+}
+
+DatabaseStorage.propTypes = {
+    children: PropTypes.any,
 }
