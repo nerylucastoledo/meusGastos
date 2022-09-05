@@ -20,13 +20,13 @@
 O sistema de login, criação de conta e reset de senha é feita com o firebase
 
 ## Imagem do projeto:
-<div style={{display: "flex"}}
+<div style={{display: "flex", justifyContent: "space-between"}}
      
- <img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494691-7b832486-9208-4430-a48c-314cb4f4b0b0.jpg">
+ <img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494691-7b832486-9208-4430-a48c-314cb4f4b0b0.jpg"/>
 
-<img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494715-4b83e261-2375-4265-a541-7434ee15c13a.jpg">
+<img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494715-4b83e261-2375-4265-a541-7434ee15c13a.jpg"/>
 
-<img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494650-5ec572bb-c864-4df9-834b-86ce0dc38432.png">   
+<img width="149" alt="printControleDeGasto" src="https://user-images.githubusercontent.com/20606664/188494650-5ec572bb-c864-4df9-834b-86ce0dc38432.png"/>   
      
 </div>
 
