@@ -56,7 +56,7 @@ function ChartPie({ data, categorys }) {
   }
 
   return (
-    <div className="app">
+    <div className="chartPie">
       {labelCategory.length && seriesCategory.length ? (
         <div className="row">
           <div className="mixed-chart">

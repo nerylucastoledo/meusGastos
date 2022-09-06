@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { Link } from 'react-router-dom'
 import { DatabaseContext } from '../../../DatabaseContext'
@@ -61,7 +60,7 @@ function Dashboard() {
                 <DashboardCards
                   key={card}
                   data={data[card]}
-                  card={card}k
+                  card={card}
                 />
               ))}
 

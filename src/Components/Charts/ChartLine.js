@@ -88,7 +88,7 @@ function ChartLine() {
     }
 
   return (
-    <div className="app">
+    <div className="chartLine">
       {valuesTotal.length && monthsTotal.length ? (
         <div className="row">
           <div className="mixed-chart">
