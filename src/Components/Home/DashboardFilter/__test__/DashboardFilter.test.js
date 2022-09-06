@@ -41,14 +41,12 @@ describe('Testing render component', () => {
 })
 
 describe('Testing selects value', () => {
-    let container
 
     it('updates on change', () => {
         const { container: wrapper } = render(<DashboardFilter setDateFilter={setDateFilter} monthToday={'setembro'} yearToday={2022} months={months} years={years}/>)
-        container = wrapper
 
-        const monthElement = container.getElementsByTagName('select')[0]
-        const yearElement = container.getElementsByTagName('select')[1]
+        const monthElement = wrapper.getElementsByTagName('select')[0]
+        const yearElement = wrapper.getElementsByTagName('select')[1]
         fireEvent.change(monthElement, { target: { value: 'outubro' }})
         fireEvent.change(yearElement, { target: { value: 2022 }})
 
