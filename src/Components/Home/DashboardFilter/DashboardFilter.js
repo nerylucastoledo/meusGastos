@@ -15,6 +15,7 @@ function DashboardFilter({ setDateFilter, monthToday, yearToday, months, years }
         <section>
             <form className={styles.filterSelect}>
                 <select
+                    data-testid='selectMonth'
                     defaultValue={monthToday}
                     onChange={({target}) => setMonthFilter(target.value)}
                     >
@@ -22,6 +23,7 @@ function DashboardFilter({ setDateFilter, monthToday, yearToday, months, years }
                     {months.map(month => <option key={month} value={month}>{month}</option>)}
                 </select>
                 <select
+                    data-testid='selectYear'
                     defaultValue={yearToday}
                     onChange={({target}) => setYearFilter(target.value)}
                     >
