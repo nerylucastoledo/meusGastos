@@ -1,6 +1,6 @@
 import React from "react"
 import * as router from 'react-router'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import DashboardCards from "../DashboardCards"
 
 const mockData = {
@@ -26,15 +26,14 @@ const navigate = jest.fn()
 describe('Component rendering correctly', () => {
     beforeEach(() => {
       jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+      render(<DashboardCards data={mockData} card={mockCard} />)
     })
 
     it('CardTest should render', () => {
-        const { getByText } = render(<DashboardCards data={mockData} card={mockCard} />)
-        expect(getByText('CardTest')).toBeTruthy()
+        expect(screen.getByText('CardTest')).toBeTruthy()
     })
 
     it('value must be visible', () => {
-        const { getByText } = render(<DashboardCards data={mockData} card={mockCard} />)
-        expect(getByText('R$ 300,00')).toBeTruthy()
+        expect(screen.getByText('R$ 300,00')).toBeTruthy()
     })
 })

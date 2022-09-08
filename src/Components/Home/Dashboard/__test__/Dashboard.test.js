@@ -1,5 +1,5 @@
 import React from "react"
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Dashboard from "../Dashboard"
 import { DatabaseContext } from "../../../../DatabaseContext"
 
@@ -71,7 +71,7 @@ describe('Component rendering with true loading property', () => {
                 <Dashboard />
             </DatabaseContext.Provider>
         )
-        
+
         const loadingElement = container.querySelector('.loading')
         expect(loadingElement).toBeTruthy()
     })
@@ -94,17 +94,22 @@ describe('Component rendering without data', () => {
 
 
 describe('Component rendering with data', () => {
+    let container
     const loading = false
     const cards = ["CardTestOne", "CardTestTwo"]
     const categorys = ['Outros']
     const date = 'setembro2022'
 
-    it('must be visible 2 cards', () => {
-        const { container } = render(
+    beforeEach(() => {
+        const { container: wrapper } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
                 <Dashboard />
             </DatabaseContext.Provider>
         )
+        container = wrapper
+    })
+
+    it('must be visible 2 cards', () => {
         const h1 = container.getElementsByTagName('h1')
         expect(h1.length).toBe(2)
         expect(h1[0].innerHTML).toBe('CardTestOne')
@@ -112,37 +117,19 @@ describe('Component rendering with data', () => {
     })
 
     it('should be visible the month and year filter', () => {
-        const { queryByTestId } = render(
-            <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
-                <Dashboard />
-            </DatabaseContext.Provider>
-        )
-
-        expect(queryByTestId('selectMonth')).toBeTruthy()
-        expect(queryByTestId('selectYear')).toBeTruthy()
+        expect(screen.queryByTestId('selectMonth')).toBeTruthy()
+        expect(screen.queryByTestId('selectYear')).toBeTruthy()
     })
 
     it('line and pie chart should be visible', () => {
-        const { container } = render(
-            <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
-                <Dashboard />
-            </DatabaseContext.Provider>
-        )
-
         const chartPie = container.querySelector('.chartPie')
         const chartLine = container.querySelector('.chartLine')
-
 
         expect(chartPie).toBeTruthy()
         expect(chartLine).toBeTruthy()
     })
 
     it('TotalUser component must be visible', () => {
-        const { container } = render(
-            <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
-                <Dashboard />
-            </DatabaseContext.Provider>
-        )
         const totalUserElement = container.querySelector('.totalUser p')
         expect(totalUserElement.innerHTML).toBe("Sua parte: <strong>R$&nbsp;0,00</strong>")
     })

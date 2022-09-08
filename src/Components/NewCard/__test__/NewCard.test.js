@@ -1,7 +1,7 @@
 import React from "react"
 
 import * as router from 'react-router'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import NewCard from "../NewCard"
 import { DatabaseContext } from "../../../DatabaseContext"
@@ -12,27 +12,21 @@ const date = 'setembro2022'
 describe('Testing NewCard component', () => {
     beforeEach(() => {
         jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
+        
+        render(
+            <DatabaseContext.Provider value={{ date }}>
+                <NewCard />
+            </DatabaseContext.Provider>
+        )
     })
 
     it('should show name and color input', () => {
-        const { getByLabelText } = render(
-            <DatabaseContext.Provider value={{ date }}>
-                <NewCard />
-            </DatabaseContext.Provider>
-        )
-
-        expect(getByLabelText('Cor do cartão')).toBeTruthy()
-        expect(getByLabelText('Nome do cartão')).toBeTruthy()
+        expect(screen.getByLabelText('Cor do cartão')).toBeTruthy()
+        expect(screen.getByLabelText('Nome do cartão')).toBeTruthy()
     })
 
     it('the register button should appear', () => {
-        const { getByText } = render(
-            <DatabaseContext.Provider value={{ date }}>
-                <NewCard />
-            </DatabaseContext.Provider>
-        )
-
-        expect(getByText('Cadastrar')).toBeTruthy()
+        expect(screen.getByText('Cadastrar')).toBeTruthy()
     })
 
     it('should update values ​​when changed', () => {

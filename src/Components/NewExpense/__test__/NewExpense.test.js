@@ -1,7 +1,7 @@
 import React from "react"
 
 import * as router from 'react-router'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 
 import NewExpense from '../NewExpense'
 import { DatabaseContext } from "../../../DatabaseContext"
@@ -26,8 +26,7 @@ describe('Testing NewExpense component', () => {
     })
 
     it('title must be visible', () => {
-        const h1Element = container.getElementsByClassName('title')[0]
-        expect(h1Element.innerHTML).toBe('Novo gasto')
+        expect(screen.getByText('Novo gasto')).toBeTruthy()
     })
 
     it('amount of selects must be 3', () => {
@@ -92,7 +91,6 @@ describe('Testing NewExpense component', () => {
         const cardInstallment = container.getElementsByTagName('input')[2]
         
         fireEvent.change(cardInstallment, { target: { value: 10 }})
-
         expect(cardInstallment.value).toBe('10')
     })
 
@@ -110,17 +108,14 @@ describe('Testing NewExpense component', () => {
         expect(selectCategory.value).toBe('CategoryTest')
     })
 
-    it('render button coreectly', () => {
-        const elementButton = container.getElementsByTagName('button')[0]
-        expect(elementButton.innerHTML).toBe('Inserir gasto')
+    it('render button correctly', () => {
+        expect(screen.getByText('Inserir gasto')).toBeTruthy()
     })
 
     it('update text button when clicked', () => {
-        const elementButton = container.getElementsByTagName('button')[0]
-        expect(elementButton.innerHTML).toBe('Inserir gasto')
+        const elementButton = screen.getByText('Inserir gasto')
         
         fireEvent.click(elementButton)
-        
         expect(elementButton.innerHTML).toBe('Inserindo...')
     })
 })
