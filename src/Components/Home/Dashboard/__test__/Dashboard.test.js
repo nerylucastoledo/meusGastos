@@ -63,8 +63,8 @@ jest.mock('react-router-dom', () => ({
     Link: () => (jest.fn())
 }))
 
-describe('render component with loading true', () => {
-    it('to be component loading have visible', () => {
+describe('Component rendering with true loading property', () => {
+    it('Loading component must be visible', () => {
         const loading = true
         const { container } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading }}>
@@ -77,8 +77,8 @@ describe('render component with loading true', () => {
     })
 })
 
-describe('render correctly without data', () => {
-    it("to be text 'Nenhum dado encontrado' have visible in screen", () => {
+describe('Component rendering without data', () => {
+    it("text 'Nenhum dado encontrado' should be visible", () => {
         const loading = false
         const data = {}
         const { container } = render(
@@ -88,19 +88,18 @@ describe('render correctly without data', () => {
         )
 
         const pElement = container.getElementsByTagName('p')[0]
-
         expect(pElement.innerHTML).toBe('Nenhum dado encontrado :(')
     })
 })
 
 
-describe('render correctly with data', () => {
+describe('Component rendering with data', () => {
     const loading = false
     const cards = ["CardTestOne", "CardTestTwo"]
     const categorys = ['Outros']
     const date = 'setembro2022'
 
-    it('to be have 2 titles cards', () => {
+    it('must be visible 2 cards', () => {
         const { container } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
                 <Dashboard />
@@ -112,7 +111,7 @@ describe('render correctly with data', () => {
         expect(h1[1].innerHTML).toBe('CardTestTwo')
     })
 
-    it('to be visible selects filter', () => {
+    it('should be visible the month and year filter', () => {
         const { queryByTestId } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
                 <Dashboard />
@@ -123,7 +122,7 @@ describe('render correctly with data', () => {
         expect(queryByTestId('selectYear')).toBeTruthy()
     })
 
-    it('to be visible chart pie and line', () => {
+    it('line and pie chart should be visible', () => {
         const { container } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
                 <Dashboard />
@@ -138,7 +137,7 @@ describe('render correctly with data', () => {
         expect(chartLine).toBeTruthy()
     })
 
-    it('to be total user equal R$ 0,00', () => {
+    it('TotalUser component must be visible', () => {
         const { container } = render(
             <DatabaseContext.Provider value={{ setDate, data, loading, cards, categorys, date, allData }}>
                 <Dashboard />

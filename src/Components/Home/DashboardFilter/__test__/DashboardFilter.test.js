@@ -21,15 +21,15 @@ const years = ['2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '
 
 const setDateFilter = jest.fn()
 
-describe('Testing render component', () => {
-    it('render correctly and show select', () => {
+describe('Component rendering correctly', () => {
+    it('should show month and year filters', () => {
         const { queryByTestId } = render(<DashboardFilter setDateFilter={setDateFilter} monthToday={'setembro'} yearToday={2022} months={months} years={years}/>)
 
         expect(queryByTestId('selectMonth')).toBeTruthy()
         expect(queryByTestId('selectYear')).toBeTruthy()
     })
 
-    it('render with default value equal setembro for month and 2022 for year', () => {
+    it('should show in the filters the values ​​of September and 2022 by default', () => {
         const { container: wrapper } = render(<DashboardFilter setDateFilter={setDateFilter} monthToday={'setembro'} yearToday={2022} months={months} years={years}/>)
 
         const monthElement = wrapper.getElementsByTagName('select')[0]
@@ -38,11 +38,8 @@ describe('Testing render component', () => {
         expect(monthElement.value).toBe("setembro")
         expect(yearElement.value).toBe("2022")
     })
-})
 
-describe('Testing selects value', () => {
-
-    it('updates on change', () => {
+    it('must update filters when selecting other options', () => {
         const { container: wrapper } = render(<DashboardFilter setDateFilter={setDateFilter} monthToday={'setembro'} yearToday={2022} months={months} years={years}/>)
 
         const monthElement = wrapper.getElementsByTagName('select')[0]

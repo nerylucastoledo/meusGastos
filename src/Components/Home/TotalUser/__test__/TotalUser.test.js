@@ -23,8 +23,8 @@ const mockData = {
     }
 }
 
-describe('Testing render component', () => {
-    it('render correctly and show select', () => {
+describe('Component rendering correctly', () => {
+    it('must show the value of R$ 1.201,00', () => {
         const { container: wrapper } = render(<TotalUser data={mockData} />)
         const strongElement = wrapper.getElementsByTagName('strong')[0]
         const pElement = wrapper.getElementsByTagName('p')[0]
