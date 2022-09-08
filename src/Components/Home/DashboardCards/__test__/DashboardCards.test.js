@@ -23,7 +23,6 @@ const mockData = {
 const mockCard = 'CardTest'
 const navigate = jest.fn()
 
-
 describe('Component rendering correctly', () => {
     beforeEach(() => {
       jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
