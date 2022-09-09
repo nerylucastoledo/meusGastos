@@ -92,7 +92,6 @@ describe('Component rendering without data', () => {
     })
 })
 
-
 describe('Component rendering with data', () => {
     let container
     const loading = false

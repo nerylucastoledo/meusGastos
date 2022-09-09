@@ -1,9 +1,8 @@
 import React from "react"
 
-import { fireEvent, render, screen } from '@testing-library/react'
-
+import { render, screen } from '@testing-library/react'
 import Header from "../Header"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter } from 'react-router-dom'
 
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
@@ -22,14 +21,10 @@ jest.mock('firebase/auth', () => {
 describe('Testing render component Header', () => {
     let container
     beforeEach(() => {
-        const { container: wrapper } = render(
-            <BrowserRouter>
-                <Header />
-            </BrowserRouter>
-        )
+        const { container: wrapper } = render( <Header />, {wrapper: BrowserRouter})
         container = wrapper
     })
-    
+
     it('Logo should be visible', () => {
         expect(screen.getByRole('img')).toBeTruthy()
     })

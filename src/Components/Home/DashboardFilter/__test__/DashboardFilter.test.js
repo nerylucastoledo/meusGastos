@@ -43,7 +43,7 @@ describe('Component rendering correctly', () => {
         const { container: wrapper } = render(<DashboardFilter setDateFilter={setDateFilter} monthToday={'setembro'} yearToday={2022} months={months} years={years}/>)
         const monthElement = wrapper.getElementsByTagName('select')[0]
         const yearElement = wrapper.getElementsByTagName('select')[1]
-        
+
         fireEvent.change(monthElement, { target: { value: 'outubro' }})
         fireEvent.change(yearElement, { target: { value: 2022 }})
 

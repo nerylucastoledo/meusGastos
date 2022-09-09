@@ -89,7 +89,7 @@ describe('Testing NewExpense component', () => {
         expect(inputValue.value).toBe("200")
 
         const cardInstallment = container.getElementsByTagName('input')[2]
-        
+
         fireEvent.change(cardInstallment, { target: { value: 10 }})
         expect(cardInstallment.value).toBe('10')
     })
@@ -114,7 +114,7 @@ describe('Testing NewExpense component', () => {
 
     it('update text button when clicked', () => {
         const elementButton = screen.getByText('Inserir gasto')
-        
+
         fireEvent.click(elementButton)
         expect(elementButton.innerHTML).toBe('Inserindo...')
     })

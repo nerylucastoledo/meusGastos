@@ -10,7 +10,7 @@ describe('Component rendering correctly', () => {
 
     it('shuld be input with a default value', () => {
         const { container: wrapper } = render(<Input label={"TestLabel"} value='Testing'/>)
-        
+
         const inputElement = wrapper.getElementsByTagName('input')[0]
         expect(inputElement.value).toBe('Testing')
     })

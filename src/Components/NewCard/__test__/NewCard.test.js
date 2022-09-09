@@ -12,7 +12,7 @@ const date = 'setembro2022'
 describe('Testing NewCard component', () => {
     beforeEach(() => {
         jest.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
-        
+
         render(
             <DatabaseContext.Provider value={{ date }}>
                 <NewCard />
