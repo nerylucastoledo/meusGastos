@@ -73,6 +73,13 @@ describe('Testing CreateAccount component', () => {
         expect(screen.getByText('Cadastrar')).toBeTruthy()
     })
 
+    it('when updating the inputs should change the value', () => {
+        const buttonElement = screen.getByText('Cadastrar')
+        fireEvent.click(buttonElement)
+
+        expect(buttonElement.innerHTML).toBe('Cadastrando...')
+    })
+
     it('should be visible box for have a account', () => {
         expect(screen.getByText('Já tem uma conta?')).toBeTruthy()
         expect(screen.getByText('Faça o login')).toBeTruthy()

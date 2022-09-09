@@ -18,26 +18,28 @@ jest.mock('firebase/auth', () => {
 })
 
 describe('Testing SignIn component', () => {
-    let container
     beforeEach(() => {
-        const { container: wrapper } = render(
+        render(
             <BrowserRouter>
                 <SignIn />
             </BrowserRouter>
         )
-        container = wrapper
     })
 
     it('should be visible title Faça o login', () => {
         expect(screen.getByText('Faça o login')).toBeTruthy()
     })
 
-    it('should be 2 inputs', () => {
+    it('should be visible text of reset password', () => {
+        expect(screen.getByText('Esqueceu a senha?')).toBeTruthy()
+    })
+
+    it('should be visible 2 inputs', () => {
         expect(screen.getByPlaceholderText('Seu e-mail')).toBeTruthy()
         expect(screen.getByPlaceholderText('Sua senha')).toBeTruthy()
     })
 
-    it('should be update inputs', () => {
+    it('when updating the inputs should change the value', () => {
         const inputEmail = screen.getByPlaceholderText('Seu e-mail')
         const inputPassword = screen.getByPlaceholderText('Sua senha')
 
@@ -52,7 +54,7 @@ describe('Testing SignIn component', () => {
         expect(screen.getByText('Entrar')).toBeTruthy()
     })
 
-    it('should be update text button when clicked', () => {
+    it('button text should update when clicked', () => {
         const buttonElement = screen.getByText('Entrar')
         fireEvent.click(buttonElement)
 

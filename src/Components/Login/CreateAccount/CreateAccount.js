@@ -23,17 +23,17 @@ function CreateAccount() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
 
-  function create(event) {
+  async function create(event) {
     event.preventDefault()
+    setLoading(true)
     let userExists = false
     const formatUser = usuario.replace(' ', '')
-    setLoading(true)
 
     const database = ref(db, formatUser)
     onValue(database, (snapshot) => userExists = snapshot.exists())
 
     if (verifyPasswords() && !userExists) {
-      createUserWithEmailAndPassword(auth, email, password)
+      await createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         updateProfile(auth.currentUser, { displayName: formatUser })
         .then(() => {

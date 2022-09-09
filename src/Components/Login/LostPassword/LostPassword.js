@@ -18,11 +18,11 @@ function LostPassword() {
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
 
-  function resetPassword(event) {
+  async function resetPassword(event) {
     event.preventDefault()
     setLoading(true)
 
-    sendPasswordResetEmail(auth, email)
+    await sendPasswordResetEmail(auth, email)
     .then(() => {
       setEmailSending(true)
       setTimeout(() => setLoading(false), 500)

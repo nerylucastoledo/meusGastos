@@ -61,6 +61,8 @@ function SignIn() {
         />
 
         {loading ? <Button disabled>Entrando...</Button> : <Button>Entrar</Button> }
+
+        <Link to={'/login/perdeu'}><p style={{textAlign: 'center', color: '#444', textDecoration: 'underline'}}>Esqueceu a senha?</p></Link>
       </form>
 
       <div className={styles.haveAccount}>
