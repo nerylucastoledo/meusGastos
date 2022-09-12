@@ -64,12 +64,14 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
         <Input
           type="text"
           label="Nome do empréstimo"
+          placeholder='Digite o nome'
           required
           onChange={({ target }) => setNameDebt(target.value)}
         />
         <Input
           type="number"
           label="Valor emprestado"
+          placeholder='Digite o valor'
           required
           onChange={({ target }) => setValueDebt(target.value)}
         />
@@ -86,11 +88,12 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
         </div>
 
         {checked &&
-            <Input
-                type="number"
-                label="Quantidade de parcelas"
-                onChange={({ target }) => setValueParcelas(target.value)}
-            />
+          <Input
+            type="number"
+            label="Quantidade de parcelas"
+            placeholder="Digite a quantidade"
+            onChange={({ target }) => setValueParcelas(target.value)}
+          />
         }
 
         <Button>Inserir</Button>
@@ -101,6 +104,6 @@ function ModalNewEmprestimo({ setOpenModal, exists }) {
 export default ModalNewEmprestimo
 
 ModalNewEmprestimo.propTypes = {
-  setOpenModal: PropTypes.boolean,
+  setOpenModal: PropTypes.func,
   exists: PropTypes.array,
 }
