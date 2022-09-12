@@ -8,7 +8,7 @@ describe('Testing ModalNewEmprestimo component', () => {
         const { container: wrapper } = render(<ModalNewEmprestimo setOpenModal={() => {}} exists={[]} />)
         container = wrapper
     })
-    
+
     it('should be visible 3 inputs', () => {
         expect(container.getElementsByTagName('input').length).toBe(3)
     })
