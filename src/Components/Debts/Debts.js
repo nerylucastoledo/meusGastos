@@ -42,8 +42,8 @@ function Debts() {
       } else {
         setListEmprestimos([])
       }
-      setLoading(false)
     })
+    setLoading(false)
 
   }, [openModal, openModalNewValue])
 

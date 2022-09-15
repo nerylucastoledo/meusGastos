@@ -42,7 +42,9 @@ export function DatabaseStorage({ children }) {
                 Object.keys(values[card]).forEach(people => {
                     if (people !== 'cor') {
                         getCategorys(values, card, people)
-                        if (!peoplesAux.includes(people)) peoplesAux.push(people)
+                        if (!peoplesAux.includes(people) && people !== 'Eu') {
+                            peoplesAux.push(people)
+                        }
                     }
                 })
             })

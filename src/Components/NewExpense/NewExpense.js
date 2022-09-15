@@ -154,7 +154,7 @@ function NewExpense() {
                 <option value="Nova">Nova pessoa</option>
                 <option value="Eu">Eu</option>
                 {peoples.map(people =>
-                    {people !== 'Eu' && <option key={people} value={people}>{people}</option>}
+                    <option key={people} value={people}>{people}</option>
                 )}
             </select>
 

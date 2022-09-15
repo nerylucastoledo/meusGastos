@@ -45,6 +45,6 @@ function ModalNewValue({ setOpenModalNewValue, nameEmprestimo }) {
 export default ModalNewValue
 
 ModalNewValue.propTypes = {
-  setOpenModalNewValue: PropTypes.boolean,
+  setOpenModalNewValue: PropTypes.func,
   nameEmprestimo: PropTypes.object,
 }
